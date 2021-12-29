@@ -1,18 +1,14 @@
 <?php
 
-
-// Routes
-
-	$Res_tpl 	= 'incs/templates/'; // Template Directory for trainer
-	$Res_css 	= 'layout/css/'; // Css Directory for trainer
-    $Res_imgs 	= 'layout/imgs/'; // Css Directory for trainer
-
-    $tpl 	= '../incs/templates/'; // Template Directory
-	$css 	= '../layout/css/'; // Css Directory
-    $imgs 	= '../layout/imgs/'; // Css Directory
+	$models = "../models/";
+	$cont 	= '../controllers/'; 
+	$css 	= '../assets/css/'; 
+    $imgs 	= '../assets/images/'; 
+	$inc  = "../incs/";
+	$uploads = "../uploads/";
 	$app   = '../';
-  
-	$res_path = '../restaurants/';
 
-	// Include The Important Files
-	include $tpl . 'header.php';
+
+	$restaurantsroute = '../restaurants/';  
+	$userroute = '../user/';  
+	
