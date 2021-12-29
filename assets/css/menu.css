@@ -1,0 +1,58 @@
+
+.header {
+  position: relative;
+  width: 100%;
+}
+
+.nav {
+  background: #fff;
+  width: auto;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  font-family: 'PT Sans', sans-serif;
+  padding: 7px;
+  width:100%;
+}
+.nav .menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  font-size: 24px;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.nav .menu .left , .nav .menu .right {display: flex;}
+
+.nav ul li {
+  margin: 0 10px;
+  padding: 10px 5px;
+  display: block;
+  position: relative;
+}
+.nav ul li a {
+  text-decoration: none;
+  display: block;
+  color: #333;
+  z-index: 2;
+  position: relative;
+  
+}
+
+.nav ul li:hover {
+  background-color: #333;
+
+}
+.nav ul li:hover a
+{
+  color: white;
+}
+
+.nav > ul > li > a {
+  display: block;
+}
+.nav > ul > li {
+  width: auto;
+}
