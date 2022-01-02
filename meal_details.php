@@ -29,10 +29,10 @@
                                 </a>
                             </div>
                             <div style="padding-top:10px">
-                                <h5><?php echo $meal['calories']?></h5>
+                                <h5><?php echo $meal['calories']?> Calories</h5>
                             </div>
                             <div style="padding-top:10px">
-                                <h5><?php echo $meal['price']?></h5>
+                                <h5><?php echo $meal['price']?> KD</h5>
                             </div>
                             <div style="padding-top:10px">
                                 <p style="margin: 0;"><?php echo $meal['details']?></p>

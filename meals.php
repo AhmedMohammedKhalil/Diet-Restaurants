@@ -126,7 +126,7 @@
                                             <div class="item-caption">
                                                 <div class="item-caption-inner">
                                                     <div class="item-caption-inner1">
-                                                        <h3><?php echo $meal['price'] ?></h3>
+                                                        <h3><?php echo $meal['price'] ?> KD</h3>
                                                         <span>See More</span>
                                                     </div>
                                                 </div>

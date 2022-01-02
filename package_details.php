@@ -27,10 +27,10 @@
                                 <h5><?php echo $restaurant['name'] ?></h5>
                             </a>                        </div>
                         <div style="padding-top:10px">
-                            <h5><?php echo $package['calories']?></h5>
+                            <h5><?php echo $package['calories']?> Calories</h5>
                         </div>
                         <div style="padding-top:10px">
-                            <h5><?php echo $package['price']?></h5>
+                            <h5><?php echo $package['price']?> KD</h5>
                         </div>
                         <div style="padding-top:10px">
                             <p style="margin: 0;"><?php echo $package['details']?></p>
@@ -59,7 +59,7 @@
                             <div class="item-caption">
                                 <div class="item-caption-inner">
                                     <div class="item-caption-inner1">
-                                        <h3><?php echo $meal['price'] ?></h3>
+                                        <h3><?php echo $meal['price'] ?> KD</h3>
                                         <span>See More</span>
                                     </div>
                                 </div>

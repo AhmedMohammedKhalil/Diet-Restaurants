@@ -31,7 +31,7 @@
                                     <div class="item-caption">
                                         <div class="item-caption-inner">
                                             <div class="item-caption-inner1">
-                                                <h3><?php echo $meal['price'] ?></h3>
+                                                <h3><?php echo $meal['price'] ?> KD</h3>
                                                 <span>See More</span>
                                             </div>
                                         </div>
@@ -59,8 +59,8 @@
                                     echo '<div class="post">';
                                         echo '<img src="'.$uploads.'packages/'.$package['id'].'/'.$package['photo'].'" alt="">';
                                         echo '<h3>'.$package['name'].'</h3>';
-                                        echo '<h3 style="margin: 10px 0;">'.$package['calories'].'</h3>';
-                                        echo '<h3 style="margin: 15px 0;">'.$package['price'].'</h3>';
+                                        echo '<h3 style="margin: 10px 0;">'.$package['calories'].' Calories</h3>';
+                                        echo '<h3 style="margin: 15px 0;">'.$package['price'].' KD</h3>';
                                         echo '<a class="button" href="'.$cont.'Controller.php?do=showPackage&id='.$package['id'].'">See All</a>';
                                     echo'</div>';
                                 }

@@ -23,7 +23,7 @@ hr.line-2{background: #333;max-width: 40px;height: 4px;}
 .color-green{color: #17AD4A !important;}
 .color-orange{color: #FF993F !important;}
 
-body {font: 14px/25px Arial, Helvetica, sans-serif;font-family: 'Open Sans', sans-serif;background: #F6F6F5 url("../images/bg.jpg") repeat 0 0;}
+body {font: 14px/25px Arial, Helvetica, sans-serif;font-family: 'Open Sans', sans-serif;background: #F6F6F5 url("../imgs/bg.jpg") repeat 0 0;}
 
 
 .logo-header a:hover {color: #333333 !important;}
@@ -61,7 +61,7 @@ article img{height: 254px;width: 100%; border: none;}
 article .art-header{padding: 40px 0 20px;}
 article .art-header h2{color: #333;font-size: 70px;font-weight: 500;padding: 0;margin: 0;}
 article .art-content{padding: 20px;}
-article .art-content.flex{display: flex;justify-content: space-around;}
+article .art-content.flex{display: flex;justify-content:space-around;}
 article .art-content.flex.restaurants{flex-wrap: wrap;}
 
 
@@ -112,4 +112,18 @@ aside .item-container {width:45%}
 a.button{background-color: #333;border-radius: 4px; padding: 10px 15px;color: #fff;}
 a.button:hover{background-color: #eee;color: #333;border: 2px solid #333;}
 
+aside .profile {
+	width: 50%;
+	box-shadow: 0px 1px 61px black;
+	padding: 20px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+
+aside .profile div {
+	margin: 10px 0;
+}
 footer {    background: white;padding: 8px;color: black;font-size: 20px;font-weight: bold;text-align: center;}
