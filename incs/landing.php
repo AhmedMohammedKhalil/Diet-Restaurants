@@ -5,7 +5,7 @@
         <span>Best Website For Choose Best Meal, Enjoy.</span>
         <hr class="line-1">
         <?php 
-            if(isset($search) && $search == 'yes') {
+            if(isset($searching) && $searching == 'yes') {
                 include($inc.'search.php');
             } 
         ?>

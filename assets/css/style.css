@@ -23,7 +23,7 @@ hr.line-2{background: #333;max-width: 40px;height: 4px;}
 .color-green{color: #17AD4A !important;}
 .color-orange{color: #FF993F !important;}
 
-body {font: 14px/25px Arial, Helvetica, sans-serif;font-family: 'Open Sans', sans-serif;background: #F6F6F5 url("../imgs/bg.jpg") repeat 0 0;}
+body {font: 14px/25px Arial, Helvetica, sans-serif;font-family: 'Open Sans', sans-serif;background: #F6F6F5 url("../images/bg.jpg") repeat 0 0;}
 
 
 .logo-header a:hover {color: #333333 !important;}
@@ -65,7 +65,7 @@ article .art-content.flex{display: flex;justify-content:space-around;}
 article .art-content.flex.restaurants{flex-wrap: wrap;}
 
 
-article .entry-title {text-align: center;background: url(../imgs/banner.jpg) no-repeat center center;min-height: 250px;padding-top: 100px;}
+article .entry-title {text-align: center;min-height: 250px;padding-top: 100px;}
 article  h1.entry-title{line-height: 1.2;font-size: 40px;color: #fff;}
 article h2{line-height: 1.1;font-size: 20px;margin: 0;}
 article .info a{ color: #BE0A0A;}
@@ -114,7 +114,7 @@ a.button:hover{background-color: #eee;color: #333;border: 2px solid #333;}
 
 aside .profile {
 	width: 50%;
-	box-shadow: 0px 1px 61px black;
+	box-shadow: 0px 1px 6px black;
 	padding: 20px;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -125,5 +125,34 @@ aside .profile {
 
 aside .profile div {
 	margin: 10px 0;
+}
+
+aside .list {
+	width: 100%;
+	margin-top: 20px;
+}
+aside .list div {
+	display: flex;
+	margin: 10px 0;
+	padding: 10px 0;
+	border-bottom: 3px solid gray;
+	
+	align-items: center;
+}
+aside .list h4, aside .list a {
+	color :black;
+}
+aside .list a {cursor: pointer;}
+aside .list a:hover {
+	text-decoration: underline;
+	color: black;
+}
+aside .list div.control , aside .list h4.control{
+	display:flex;
+	justify-content:space-around;
+	flex:1;
+	border: none;
+	padding: 0;
+	margin: 0;
 }
 footer {    background: white;padding: 8px;color: black;font-size: 20px;font-weight: bold;text-align: center;}

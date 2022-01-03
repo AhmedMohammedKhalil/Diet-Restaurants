@@ -6,6 +6,10 @@
     include($inc.'header.php');
     include($inc.'landing.php');
     $meals = json_decode(base64_decode($_GET['meals']),JSON_OBJECT_AS_ARRAY);
+    if(isset($_GET['filters'])) {
+        $filters = json_decode($_GET['filters'],JSON_OBJECT_AS_ARRAY);
+        extract($filters);
+    }
 ?>
     <section id="container">
                 <div id="main-content">
@@ -28,9 +32,18 @@
                                             <div >
                                                 <h4 style="text-decoration: underline;">Filter for Meals</h4>
                                             </div>
-                                        <form name="form1"  method="" action="">
+                                            <?php if(isset($_GET['errors'])) {
+                                                $errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);
+                                                echo '<ul style="width:50%;margin:0 auto">';
+                                                foreach($errors as $er) {
+                                                    echo "<li style='color:red;text-align:left'>$er</li>";
+                                                }
+                                                echo '</ul>';
+                                            }?>
+                                        <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=filterMeals" ?>">
                                                 <div class="searching">
-                                                    <input type="search" name="search" id="search" placeholder="Make Search for Meals"  />
+                                                    <input type="search" name="search" id="search" placeholder="Make Search for Meals"
+                                                        value="<?php if(isset($search)) { echo $search; }?>"/>
                                                 </div>
                                             <div>
                                                 <div >
@@ -38,33 +51,42 @@
                                                 </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price1" value="1"/>
+                                                            <input type="checkbox" name="price[]" id="price1" value="1"
+                                                                <?php if(isset($price) && in_array('1',$price)) {echo 'checked';} ?>/>
                                                             <span>0 to 500</span>	
                                                         </label>	
                                                     </div>
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price2" value="2"/>
+                                                            <input type="checkbox" name="price[]" id="price2" value="2"
+                                                                <?php if(isset($price) && in_array('2',$price)) {echo 'checked';} ?>/>
+
                                                             <span>500 to 1500</span>	
                                                         </label>	
                                                     </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price3" value="3"/>
+                                                            <input type="checkbox" name="price[]" id="price3" value="3"
+                                                                <?php if(isset($price) && in_array('3',$price)) {echo 'checked';} ?>/>
+
                                                             <span>1500 to 2500</span>	
                                                         </label>	
                                                     </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price4" value="4"/>
+                                                            <input type="checkbox" name="price[]" id="price4" value="4"
+                                                                <?php if(isset($price) && in_array('4',$price)) {echo 'checked';} ?>/>
+
                                                             <span>2500 to 3500</span>	
                                                         </label>	
                                                     </div>
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price5" value="5"/>
+                                                            <input type="checkbox" name="price[]" id="price5" value="5"
+                                                                <?php if(isset($price) && in_array('5',$price)) {echo 'checked';} ?>/>
+
                                                             <span>3500 to up</span>	
                                                         </label>	
                                                     </div>
@@ -75,35 +97,44 @@
                                                 </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price1" value="1"/>
+                                                            <input type="checkbox" name="calories[]" id="calories1" value="1"
+                                                                <?php if(isset($calories) && in_array('1',$calories)) {echo 'checked';} ?>/>
                                                             <span>0 to 500</span>	
                                                         </label>	
                                                     </div>
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price2" value="2"/>
+                                                            <input type="checkbox" name="calories[]" id="calories2" value="2"
+                                                                <?php if(isset($calories) && in_array('2',$calories)) {echo 'checked';} ?>/>
+
                                                             <span>500 to 1500</span>	
                                                         </label>	
                                                     </div>
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price3" value="3"/>
+                                                            <input type="checkbox" name="calories[]" id="calories3" value="3"
+                                                                <?php if(isset($calories) && in_array('3',$calories)) {echo 'checked';} ?>/>
+
                                                             <span>1500 to 2500</span>	
                                                         </label>	
                                                     </div>
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price4" value="4"/>
+                                                            <input type="checkbox" name="calories[]" id="calories4" value="4"
+                                                                <?php if(isset($calories) && in_array('4',$calories)) {echo 'checked';} ?>/>
+
                                                             <span>2500 to 3500</span>	
                                                         </label>	
                                                     </div>
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price5" value="5"/>
+                                                            <input type="checkbox" name="calories[]" id="calories5" value="5"
+                                                                <?php if(isset($calories) && in_array('5',$calories)) {echo 'checked';} ?>/>
+
                                                             <span>3500 to up</span>	
                                                         </label>	
                                                     </div>
@@ -126,7 +157,9 @@
                                             <div class="item-caption">
                                                 <div class="item-caption-inner">
                                                     <div class="item-caption-inner1">
+                                                        <h3><?php echo $meal['name'] ?></h3>
                                                         <h3><?php echo $meal['price'] ?> KD</h3>
+                                                        <h3>rating : <?php echo $meal['count_rating'] ?></h3>
                                                         <span>See More</span>
                                                     </div>
                                                 </div>

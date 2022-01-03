@@ -15,24 +15,26 @@
   padding: 7px;
   width:100%;
 }
-.nav .menu {
+.menu {
   list-style: none;
   padding: 0;
   display: flex;
   font-size: 24px;
-  justify-content: space-between;
   flex: 1;
+}
+.nav .menu{
+  justify-content: space-between;
 }
 
 .nav .menu .left , .nav .menu .right {display: flex;}
 
-.nav ul li {
+.nav ul li , .menu ul li{
   margin: 0 10px;
   padding: 10px 5px;
   display: block;
   position: relative;
 }
-.nav ul li a {
+.nav ul li a ,.menu ul li a{
   text-decoration: none;
   display: block;
   color: #333;
@@ -41,11 +43,11 @@
   
 }
 
-.nav ul li:hover {
+.nav ul li:hover ,.menu ul li:hover{
   background-color: #333;
 
 }
-.nav ul li:hover a
+.nav ul li:hover a,.menu ul li:hover a
 {
   color: white;
 }

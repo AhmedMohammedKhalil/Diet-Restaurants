@@ -27,6 +27,21 @@ if($action != "") {
         $res = new UserController();
         $res->logout();
     }
+    if($action == 'rateMeal') {
+        $id = $_GET['id'];
+        $meal = new MealsController();
+        $meal->rate($id);
+    }
+    if($action == 'ratePackage') {
+        $id = $_GET['id'];
+        $meal = new PackagesController();
+        $meal->rate($id);
+    }
+    if($action == 'rateRes') {
+        $id = $_GET['id'];
+        $meal = new RestaurantsController();
+        $meal->rate($id);
+    }
 
     //restaurants route
     if($action == 'showResLogin') {
@@ -76,6 +91,18 @@ if($action != "") {
     if($action == 'showCompare') {
 
         HomeController::show_compare();
+    }
+    if($action == 'filterMeals') {
+        $meal = new MealsController();
+        $meal->makeFilter();
+    }
+    if($action == 'filterPackages') {
+        $package = new PackagesController();
+        $package->makeFilter();
+    }
+    if($action = "searchRes") {
+        $res = new RestaurantsController();
+        $res->search();
     }
     
     

@@ -31,8 +31,12 @@ class User{
             $query->bindParam("address", $address, PDO::PARAM_STR);
             $successed = $query->execute();
             if($successed){
-                $_SESSION['user'] = $data;    
-                $_SESSION['username'] = $data['name'];
+                $query = $this->con->prepare("SELECT * FROM users WHERE email=:email");
+                $query->bindParam("email", $email, PDO::PARAM_STR);
+                $query->execute();
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['user'] = $result;    
+                $_SESSION['username'] = $result['name'];
                 $_SESSION['type'] ="user";
 
                 header('location: ../index.php' );

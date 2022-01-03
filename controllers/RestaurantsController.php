@@ -115,4 +115,99 @@ class RestaurantsController {
         unset($_SESSION['username']);
         header('location:../index.php');
     }
+
+
+    public function rate($id) {
+        include_once('../models/Restaurant.php');
+        include_once('../models/Meal.php');
+        include_once('../models/Package.php');
+
+               
+        if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            if(isset($_POST['Make_Rate'])) {
+                $res = new Restaurant();
+                $meal = new Meal();
+                $package = new Package();
+
+                $restaurant = $res->getAllRestaurant('*','restaurants',"where id ={$id}");
+                $meals = $meal->getAllMeals('*','meals',"where restaurant_id ={$id}");
+                $packages = $package->getAllPackages('*','packages',"where restaurant_id ={$id}"); 
+                $user_id = $_SESSION['user']['id'];
+                $rate = trim($_POST['rate']);
+                $data = [
+                    'rate'=>$rate,
+                    'meals'=>$meals,
+                    'restaurant' => $restaurant,
+                    'packages' => $packages
+                ];
+                $encoded = base64_encode(json_encode($data));
+                $userRate = $res->getRateForUser($id,$user_id);
+                $where = '';
+                if(count($userRate) > 0) {
+                    $user_id = intval($user_id);
+                    $where = "WHERE user_id =$user_id and type='restaurant' and type_id =$id"; 
+                }
+                $success = $res->addRate($id,$user_id,$rate,$where);
+                if(!$success) {
+                    $error=json_encode(["sever error exist"]);
+                    header("location: ../restaurant_details.php?errors={$error}&data={$encoded}" );
+                    exit();
+                }
+                $id = intval($id);
+                if($restaurant[0]['count_rating'] == 0) {
+                    $success = $res->updateRate($rate,$id);
+                } else {
+                    $AllRates = $res->getAllRates($id);
+                    $sum = 0;
+                    foreach($AllRates as $rate) {
+                        $sum += $rate['rating'];
+                    }
+                    $rate_count = $sum / count($AllRates);
+                    $success = $res->updateRate($rate_count,$id);
+                }
+                if($success) {
+                    $restaurant = $res->getAllRestaurant('*','restaurants',"where id ={$id}");
+                    $data = [
+                        'rate'=>$rate,
+                        'meals'=>$meals,
+                        'restaurant' => $restaurant,
+                        'packages' => $packages
+                    ];
+                    $encoded = base64_encode(json_encode($data));
+                    header("location: ../restaurant_details.php?data={$encoded}" );
+                    exit();
+                }
+                   
+
+            }
+        }
+    }
+
+    public function search() {
+        include_once('../models/Restaurant.php');
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            if(isset($_POST['search'])) { 
+                $resmodel = new Restaurant();
+                $search = trim($_POST['searchRes']) ?? '';
+                $restaurants = $resmodel->getLatest('*','restaurants','id',false);
+                $encoded = base64_encode(json_encode($restaurants));
+              
+                if(empty($search)) {
+                    $error=json_encode(["search is required"]);
+                    header("location: ../restaurants.php?errors={$error}&restaurants={$encoded}" );
+                    exit();
+                } else {
+                    $str = "" ; 
+                    if(!empty($search)) {
+                        $str .= "name like '%{$search}%' or description like '%{$search}%'";
+                    }
+
+                    $restaurants = base64_encode(json_encode($resmodel->getAllRestaurant('*','restaurants',"WHERE {$str}")));
+                    header("location: ../restaurants.php?search={$search}&restaurants={$restaurants}" );
+
+                }
+            }
+        }
+    }
 }

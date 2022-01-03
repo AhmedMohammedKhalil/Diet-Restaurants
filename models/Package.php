@@ -33,5 +33,60 @@ class Package{
 		return $all;
 
 	}
+
+    public function getPackage($id) {
+
+        $get = $this->con->prepare("SELECT * FROM packages where id = $id");
+
+		$get->execute();
+
+		$package = $get->fetchAll(PDO::FETCH_ASSOC);
+
+		return $package;
+    }
+    public function getRateForUser($package_id,$user_id) {
+        $get = $this->con->prepare("SELECT * FROM rates where type='package' and type_id = $package_id and user_id = $user_id");
+
+		$get->execute();
+
+		$package = $get->fetchAll(PDO::FETCH_ASSOC);
+
+		return $package;
+    }
+
+    public function getAllRates($package_id) {
+        $getall = $this->con->prepare("SELECT * FROM rates where type='package' and type_id = $package_id");
+
+		$getall->execute();
+
+		$rates = $getall->fetchAll(PDO::FETCH_ASSOC);
+
+		return $rates;
+    }
+
+    public function addRate($package_id,$user_id,$rating,$where) {
+        if($where != '')
+        {
+            $query = $this->con->prepare("UPDATE rates SET rating=:rating {$where}");
+            $query->bindParam("rating", $rating, PDO::PARAM_STR);
+            $successed = $query->execute();
+        } else {
+            $query = $this->con->prepare("INSERT INTO rates(type_id,user_id,rating,type) 
+                                    VALUES (:package_id,:user_id,:rating,'package')");
+            $query->bindParam("package_id", $package_id, PDO::PARAM_STR);
+            $query->bindParam("user_id", $user_id, PDO::PARAM_STR);
+            $query->bindParam("rating", $rating, PDO::PARAM_STR);
+            $successed = $query->execute();
+        }
+        return $successed;
+    }
+
+    public function updateRate($count_rating,$package_id) {
+
+        $query = $this->con->prepare("UPDATE packages SET count_rating=:count_rating WHERE id={$package_id}");
+        $query->bindParam("count_rating", $count_rating, PDO::PARAM_STR);
+        $successed = $query->execute();
+        return $successed;
+    }
 }
 

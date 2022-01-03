@@ -25,7 +25,11 @@
                         <div style="padding-top:10px">
                             <a href="<?php echo $cont.'Controller.php?do=showRestaurant&id='.$restaurant['id'] ?>" style="color:black">
                                 <h5><?php echo $restaurant['name'] ?></h5>
-                            </a>                        </div>
+                            </a>                        
+                        </div>
+                        <div style="padding-top:10px">
+                                <h5>rating : <?php echo $package['count_rating']?></h5>
+                        </div>
                         <div style="padding-top:10px">
                             <h5><?php echo $package['calories']?> Calories</h5>
                         </div>
@@ -35,9 +39,22 @@
                         <div style="padding-top:10px">
                             <p style="margin: 0;"><?php echo $package['details']?></p>
                         </div>
+                        <?php if(!isset($_SESSION['username'])) { ?>
+                        <div style="padding-top:10px">
+                            <p style="margin: 0;color:red">Please Sign in as user for make rate or subscribe</p>
+                        </div>
+                        <?php } else { ?> 
+                            <div style="padding-top:10px" class="rating">
+                            <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=ratePackage&id=".$package['id'] ?>">
+                                    <input type="number" name="rate" min="0.1" max="5" step="0.1" id="rate" placeholder="Enter Rate" required="required"/>
+                                    <input class="submit" type="submit" name="Make_Rate" value="Make Rate" >
+                            </form>
+                        </div>
                         <div style="padding-top:10px">
                             <a href="#" class="button">Subscribe</a>
                         </div>
+                        <?php }?>
+                        
                     </div>
                 </div>
             </article>
@@ -59,7 +76,9 @@
                             <div class="item-caption">
                                 <div class="item-caption-inner">
                                     <div class="item-caption-inner1">
+                                        <h3><?php echo $meal['name'] ?></h3>
                                         <h3><?php echo $meal['price'] ?> KD</h3>
+                                        <h3>rating : <?php echo $meal['count_rating'] ?></h3>
                                         <span>See More</span>
                                     </div>
                                 </div>

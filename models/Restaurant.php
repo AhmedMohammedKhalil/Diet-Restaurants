@@ -58,8 +58,12 @@ class Restaurant{
             $query->bindParam("description", $description, PDO::PARAM_STR);
             $successed = $query->execute();
             if($successed){
-                $_SESSION['restaurant'] = $data;    
-                $_SESSION['username'] = $data['name'];
+                $query = $this->con->prepare("SELECT * FROM restaurants WHERE email=:email");
+                $query->bindParam("email", $email, PDO::PARAM_STR);
+                $query->execute();
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['restaurant'] = $result;    
+                $_SESSION['username'] = $result['name'];
                 $_SESSION['type'] ="restaurant";
 
                 header('location: ../index.php' );
@@ -97,4 +101,59 @@ class Restaurant{
 		return $all;
 
 	}
+
+    public function getRestaurant($id) {
+
+        $get = $this->con->prepare("SELECT * FROM restaurants where id = $id");
+
+		$get->execute();
+
+		$res = $get->fetchAll(PDO::FETCH_ASSOC);
+
+		return $res;
+    }
+    public function getRateForUser($res_id,$user_id) {
+        $get = $this->con->prepare("SELECT * FROM rates where type='restaurant' and type_id = $res_id and user_id = $user_id");
+
+		$get->execute();
+
+		$res = $get->fetchAll(PDO::FETCH_ASSOC);
+
+		return $res;
+    }
+
+    public function getAllRates($res_id) {
+        $getall = $this->con->prepare("SELECT * FROM rates where type='restaurant' and type_id = $res_id");
+
+		$getall->execute();
+
+		$rates = $getall->fetchAll(PDO::FETCH_ASSOC);
+
+		return $rates;
+    }
+
+    public function addRate($res_id,$user_id,$rating,$where) {
+        if($where != '')
+        {
+            $query = $this->con->prepare("UPDATE rates SET rating=:rating {$where}");
+            $query->bindParam("rating", $rating, PDO::PARAM_STR);
+            $successed = $query->execute();
+        } else {
+            $query = $this->con->prepare("INSERT INTO rates(type_id,user_id,rating,type) 
+                                    VALUES (:res_id,:user_id,:rating,'restaurant')");
+            $query->bindParam("res_id", $res_id, PDO::PARAM_STR);
+            $query->bindParam("user_id", $user_id, PDO::PARAM_STR);
+            $query->bindParam("rating", $rating, PDO::PARAM_STR);
+            $successed = $query->execute();
+        }
+        return $successed;
+    }
+
+    public function updateRate($count_rating,$res_id) {
+
+        $query = $this->con->prepare("UPDATE restaurants SET count_rating=:count_rating WHERE id={$res_id}");
+        $query->bindParam("count_rating", $count_rating, PDO::PARAM_STR);
+        $successed = $query->execute();
+        return $successed;
+    }
 }

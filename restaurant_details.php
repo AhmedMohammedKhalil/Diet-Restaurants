@@ -27,7 +27,11 @@
                                     echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="">'; 
                         ?> 
                     </div>
+                    
                     <div class="" style="text-align:left;flex:1">
+                        <div style="padding-top:10px">
+                            <h5>rating : <?php echo $restaurant['count_rating']?></h5>
+                        </div>
                         <div style="padding-top:10px">
                             <h5><?php echo $restaurant['owner_name']?></h5>
                         </div>
@@ -40,6 +44,18 @@
                         <div style="padding-top:10px">
                             <p style="margin: 0;"><?php echo $restaurant['description']?></p>
                         </div>
+                        <?php if(!isset($_SESSION['username'])) { ?>
+                        <div style="padding-top:10px">
+                            <p style="margin: 0; color:red">Please Sign in as user for make rate</p>
+                        </div>
+                        <?php } else { ?> 
+                            <div style="padding-top:10px" class="rating">
+                            <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=rateRes&id=".$restaurant['id'] ?>">
+                                    <input type="number" name="rate" min="0.1" max="5" step="0.1" id="rate" placeholder="Enter Rate" required="required"/>
+                                    <input class="submit" type="submit" name="Make_Rate" value="Make Rate" >
+                            </form>
+                        </div>
+                        <?php }?>
                     </div>
                 </div>
             </article>
@@ -61,7 +77,9 @@
                             <div class="item-caption">
                                 <div class="item-caption-inner">
                                     <div class="item-caption-inner1">
+                                        <h3><?php echo $meal['name'] ?></h3>
                                         <h3><?php echo $meal['price'] ?> KD</h3>
+                                        <h3>rating : <?php echo $meal['count_rating'] ?></h3>
                                         <span>See More</span>
                                     </div>
                                 </div>
@@ -88,6 +106,7 @@
                             echo '<div class="post">';
                                 echo '<img src="'.$uploads.'packages/'.$package['id'].'/'.$package['photo'].'" alt="">';
                                 echo '<h3>'.$package['name'].'</h3>';
+                                echo '<h3>rating :'.$package['count_rating'].'</h3>';
                                 echo '<h3 style="margin: 10px 0;">'.$package['calories'].' Calories</h3>';
                                 echo '<h3 style="margin: 15px 0;">'.$package['price'].' KD</h3>';
                                 echo '<a class="button" href="'.$cont.'Controller.php?do=showPackage&id='.$package['id'].'">See All</a>';
