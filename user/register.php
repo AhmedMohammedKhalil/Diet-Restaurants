@@ -3,6 +3,9 @@
 	session_start();
 	$pageTitle = 'User Register';
 	include 'init.php';
+	if(isset($_SESSION['username'])) {
+		header("location: {$app}");
+	}
 	include $inc."header.php";
 	if(isset($_GET['errors'])) {
 		$errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);

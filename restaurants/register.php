@@ -3,11 +3,14 @@
   session_start();
 	$pageTitle = 'Restaurants Register';
 	include 'init.php';
-  include $inc."header.php";
-  if(isset($_GET['errors'])) {
-	$errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);
-    $data = json_decode($_GET['data'],JSON_OBJECT_AS_ARRAY);
-  }
+	if(isset($_SESSION['username'])) {
+		header("location: {$app}");
+	}
+	include $inc."header.php";
+	if(isset($_GET['errors'])) {
+		$errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);
+		$data = json_decode($_GET['data'],JSON_OBJECT_AS_ARRAY);
+	}
 ?>
     <section id="container">
 					<div id="main-content">

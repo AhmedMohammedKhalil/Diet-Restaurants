@@ -87,7 +87,11 @@ class HomeController {
     }
 
     public static function show_compare() {
-        header('location: ../compare.php');
+        include_once('../models/Restaurant.php');
+        $res = new Restaurant();
+        $restaurants = $res->getAllRestaurant('id , name','restaurants');
+        $data =  base64_encode(json_encode(['restaurants' => $restaurants]));
+        header('location: ../compare.php?data='.$data);
     }
 
 }

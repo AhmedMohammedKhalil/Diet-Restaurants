@@ -88,5 +88,20 @@ class Package{
         $successed = $query->execute();
         return $successed;
     }
+
+
+    public function subscribePackage($user_id,$package_id) {
+
+        $start = date('d/m/Y');
+        $end = date('d/m/Y', strtotime("+30 days"));
+        $query = $this->con->prepare("INSERT INTO user_subscripes(user_id,package_id,start,end) 
+                                    VALUES (:user_id,:package_id,:start,:end)");
+        $query->bindParam("user_id", $user_id, PDO::PARAM_STR);
+        $query->bindParam("package_id", $package_id, PDO::PARAM_STR);
+        $query->bindParam("start", $start, PDO::PARAM_STR);
+        $query->bindParam("end", $end, PDO::PARAM_STR);
+        $successed = $query->execute();
+        return $successed;
+    }
 }
 

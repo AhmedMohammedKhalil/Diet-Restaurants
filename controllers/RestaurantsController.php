@@ -210,4 +210,27 @@ class RestaurantsController {
             }
         }
     }
+
+
+    public function compare() {
+        include_once('../models/Restaurant.php');
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            if(isset($_POST['compare'])) { 
+                $res = new Restaurant();
+                $restaurants = $res->getAllRestaurant('id , name','restaurants');
+                $data =  base64_encode(json_encode(['restaurants' => $restaurants]));
+                $res1 = trim($_POST['res1']);
+                $res2 = trim($_POST['res2']);
+                if($res1 == $res2) {
+                    $errors=json_encode(["Restaurants are same"]);
+                    header("location: ../compare.php?errors={$errors}&data={$data}" );
+                    exit();
+                }
+
+                
+            }
+        }
+
+    }
 }

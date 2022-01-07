@@ -130,4 +130,15 @@ class MealsController {
             }
         }
     }
+
+
+    public function buyMeal($id) {
+        include_once('../models/Meal.php');
+        $user_id = $_SESSION['user']['id'];
+        $meal = new Meal();
+        $success = $meal->orderMeal($user_id,$id);
+        if($success) {
+            header('location: Controller.php?do=showUserOrders');
+        }
+    }
 }

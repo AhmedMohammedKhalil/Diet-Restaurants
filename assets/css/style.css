@@ -126,7 +126,15 @@ aside .profile {
 aside .profile div {
 	margin: 10px 0;
 }
-
+aside .profile div img {
+	width:200px !important;
+	height:200px !important;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+}
 aside .list {
 	width: 100%;
 	margin-top: 20px;

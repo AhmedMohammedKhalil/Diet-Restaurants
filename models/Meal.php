@@ -103,4 +103,13 @@ class Meal{
         $successed = $query->execute();
         return $successed;
     }
+
+    public function orderMeal($user_id,$meal_id) {
+        $query = $this->con->prepare("INSERT INTO user_meals(user_id,meal_id) 
+                                    VALUES (:user_id,:meal_id)");
+        $query->bindParam("user_id", $user_id, PDO::PARAM_STR);
+        $query->bindParam("meal_id", $meal_id, PDO::PARAM_STR);
+        $successed = $query->execute();
+        return $successed;
+    }
 }

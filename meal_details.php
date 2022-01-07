@@ -49,7 +49,7 @@
                             <div style="padding-top:10px">
                                 <p style="margin: 0;color:red">Please Sign in as user for make rate or order</p>
                             </div>
-                            <?php } else { 
+                            <?php } else if (isset($_SESSION['type']) && $_SESSION['type'] == 'user') { 
                                 if(isset($_GET['errors'])) {
                                     $errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);
                                     echo '<ul style="width:50%;margin:0 auto">';
@@ -65,7 +65,7 @@
                                     </form>
                                 </div>
                                 <div style="padding-top:10px">
-                                    <a href="#" class="button">Make Order</a>
+                                    <a href="<?php echo $cont."Controller.php?do=buyMeal&id=".$meal['id'] ?>" class="button">Make Order</a>
                                 </div>
                             <?php }?>
                         </div>

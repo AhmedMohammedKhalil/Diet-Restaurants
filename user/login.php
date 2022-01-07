@@ -3,6 +3,9 @@
 	session_start();
 	$pageTitle = 'User login';
 	include 'init.php';
+	if(isset($_SESSION['username'])) {
+		header("location: {$app}");
+	}
 	$headerTitle = 'User Login';
 	include $inc.'header.php';
 	if(isset($_GET['errors'])) {

@@ -48,7 +48,7 @@
                         <div style="padding-top:10px">
                             <p style="margin: 0; color:red">Please Sign in as user for make rate</p>
                         </div>
-                        <?php } else { ?> 
+                        <?php } else if (isset($_SESSION['type']) && $_SESSION['type'] == 'user'){ ?> 
                             <div style="padding-top:10px" class="rating">
                             <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=rateRes&id=".$restaurant['id'] ?>">
                                     <input type="number" name="rate" min="0.1" max="5" step="0.1" id="rate" placeholder="Enter Rate" required="required"/>

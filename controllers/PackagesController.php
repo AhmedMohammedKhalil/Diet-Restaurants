@@ -138,4 +138,14 @@ class PackagesController {
         }
     }
 
+    public function subscribePackage($id) {
+        include_once('../models/Package.php');
+        $user_id = $_SESSION['user']['id'];
+        $package = new Package();
+        $success = $package->subscribePackage($user_id,$id);
+        if($success) {
+            header('location: Controller.php?do=showUserSubscribes');
+        }
+    }
+
 }
