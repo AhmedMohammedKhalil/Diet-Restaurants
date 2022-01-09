@@ -6,7 +6,6 @@
     $pageTitle = "Meal Details";
     include($inc.'header.php');
     include($inc.'landing.php');
-
     $data = json_decode(base64_decode($_GET['data']),JSON_OBJECT_AS_ARRAY);
     extract($data);
     $meal = $meal[0];

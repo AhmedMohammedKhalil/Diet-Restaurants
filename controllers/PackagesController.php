@@ -148,4 +148,249 @@ class PackagesController {
         }
     }
 
+
+    public function showAllPackages() {
+        include_once('../models/Package.php');
+        $packageModel = new Package();
+        $packages = base64_encode(json_encode($packageModel->getAllPackages('*','packages')));
+        header("location: ../restaurants/packages.php?packages={$packages}" );
+    }
+
+
+    public function createPackage () {
+        include_once('../models/Meal.php');
+        $restaurant_id = $_SESSION['restaurant']['id'];
+        $mealModel = new Meal();
+        $meals = $mealModel->getAllMeals('*','meals','where restaurant_id ='.$restaurant_id,null,'id','ASC');
+        $encoded = base64_encode(json_encode($meals));
+        if(count($meals) > 0) 
+            header("location: ../restaurants/add_package.php?meals={$encoded}" );
+        else 
+            header("location: ../restaurants/" );
+
+    }
+
+    public function storePackage () {
+        include_once('../models/Package.php');
+        include_once('../models/Meal.php');
+
+        $restaurant_id = $_SESSION['restaurant']['id'];
+        $mealModel = new Meal();
+        $meals = $mealModel->getAllMeals('*','meals','where restaurant_id ='.$restaurant_id,null,'id','ASC');
+        $meals = base64_encode(json_encode($meals));
+        if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            if(isset($_POST['Add_Package'])) {
+                $name=trim($_POST['name']);
+                $calories = trim($_POST['calories']);
+                $price = trim($_POST['price']);
+                $mealsSelected = $_POST['meals'];
+                $details = trim($_POST['details']);
+                $photoName = $_FILES['image']['name'];
+                $error=[];
+                if (empty($name)) {
+                    array_push($error,"name required");
+                } 
+                if (!empty($name) && is_numeric($name)) {
+                    array_push($error,"name must be contains letters (not number only)");
+                } 
+                
+                if (empty($calories)) {
+                    array_push($error,"calories required");
+                }
+                if (!empty($calories) && (!is_numeric($calories) || $calories < 0)) {
+                    array_push($error,"calories must be number and greater than 0");
+                } 
+                if (empty($price)) {
+                    array_push($error,"price required");
+                }
+                if (!empty($price) && (!is_numeric($price) || $price < 0)) {
+                    array_push($error,"price must be number and greater than 0");
+                } 
+                
+                if (empty($details)) {
+                    array_push($error,"details required");
+                } 
+                if (empty($photoName)) { 
+                    array_push($error,"photo required");
+                } 
+                if (!empty($photoName)) {
+
+                    $photoSize = $_FILES['image']['size'];
+                    $photoTmp	= $_FILES['image']['tmp_name'];
+                    // List Of Allowed File Typed To Upload
+
+                    $photoAllowedExtension = array("jpeg", "jpg", "png");
+
+                    // Get photo Extension
+                    $explode = explode('.', $photoName);
+                    $photoExtension = strtolower(end($explode));
+                    if (! empty($photoName) && ! in_array($photoExtension, $photoAllowedExtension)) {
+                        $error[] = 'This Extension Is Not <strong>Allowed</strong>';
+                    }
+    
+                    if ($photoSize > 4194304) {
+                        $error[] = 'photo Cant Be Larger Than <strong>4MB</strong>';
+                    }
+                }
+
+                $olddata = [
+                    'calories'=>$calories,
+                    'name'=>$name,
+                    'price'=>$price ,
+                    'details'=>$details,
+                    'meals'=> $mealsSelected,
+                    'photo' => $photoName,
+                    'restaurant_id' => $restaurant_id
+                ];
+
+                $dataInserted = [
+                    'calories'=>$calories,
+                    'name'=>$name,
+                    'price'=>$price ,
+                    'details'=>$details,
+                    'photo' => $photoName,
+                    'restaurant_id' => $restaurant_id
+                ];
+
+                $encoded= json_encode($olddata);
+                if(!empty($error))
+                {
+                    $error=json_encode($error);
+                    header("location: ../restaurants/add_package.php?errors={$error}&data={$encoded}&meals={$meals}" );
+                    exit();
+                }
+                $package = new package();
+                $package_id = $package->insert($dataInserted,$mealsSelected);
+                if($package_id) {
+                    $path = '../uploads/packages/'.$package_id;
+                    if(!is_dir($path)) {
+                        mkdir($path);
+                    }
+                    move_uploaded_file($photoTmp, '../uploads/packages/'.$package_id.'/'. $photoName);
+                    $this->showAllPackages();
+                }
+                
+            } 
+        }
+    }
+
+    public function editPackage ($id) {
+        include_once('../models/Package.php');
+        include_once('../models/Meal.php');
+
+        $restaurant_id = $_SESSION['restaurant']['id'];
+        $mealModel = new Meal();
+        $meals = $mealModel->getAllMeals('*','meals','where restaurant_id ='.$restaurant_id,null,'id','ASC');
+        $packageModel = new package();
+        $package = $packageModel->getPackageById($id);
+        $packagemeals = $packageModel->getPackageMeals($id);
+        $data = base64_encode(json_encode(['package' => $package , 'meals' => $meals , 'packagemaels' => $packagemeals]));
+        header("location: ../restaurants/update_package.php?data={$data}" );
+    }
+
+    public function updatePackage () {
+        include_once('../models/Package.php');
+        include_once('../models/Meal.php');
+
+        $restaurant_id = $_SESSION['restaurant']['id'];
+        $mealModel = new Meal();
+        $meals = $mealModel->getAllMeals('*','meals','where restaurant_id ='.$restaurant_id,null,'id','ASC');
+        $meals = base64_encode(json_encode($meals));
+        if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            if(isset($_POST['update_Package'])) {
+                $id=trim($_POST['id']);
+                $name=trim($_POST['name']);
+                $calories = trim($_POST['calories']);
+                $price = trim($_POST['price']);
+                $mealsSelected = $_POST['meals'];
+                $details = trim($_POST['details']);
+                $photoName = $_FILES['image']['name'];
+                $error=[];
+                if (empty($name)) {
+                    array_push($error,"name required");
+                } 
+                if (!empty($name) && is_numeric($name)) {
+                    array_push($error,"name must be contains letters (not number only)");
+                } 
+                
+                if (empty($calories)) {
+                    array_push($error,"calories required");
+                }
+                if (!empty($calories) && (!is_numeric($calories) || $calories < 0)) {
+                    array_push($error,"calories must be number and greater than 0");
+                } 
+                if (empty($price)) {
+                    array_push($error,"price required");
+                }
+                if (!empty($price) && (!is_numeric($price) || $price < 0)) {
+                    array_push($error,"price must be number and greater than 0");
+                } 
+                
+                if (empty($details)) {
+                    array_push($error,"details required");
+                } 
+                if (empty($photoName)) { 
+                    array_push($error,"photo required");
+                } 
+                if (!empty($photoName)) {
+
+                    $photoSize = $_FILES['image']['size'];
+                    $photoTmp	= $_FILES['image']['tmp_name'];
+                    // List Of Allowed File Typed To Upload
+
+                    $photoAllowedExtension = array("jpeg", "jpg", "png");
+
+                    // Get photo Extension
+                    $explode = explode('.', $photoName);
+                    $photoExtension = strtolower(end($explode));
+                    if (! empty($photoName) && ! in_array($photoExtension, $photoAllowedExtension)) {
+                        $error[] = 'This Extension Is Not <strong>Allowed</strong>';
+                    }
+    
+                    if ($photoSize > 4194304) {
+                        $error[] = 'photo Cant Be Larger Than <strong>4MB</strong>';
+                    }
+                }
+
+                $olddata = [
+                    'calories'=>$calories,
+                    'name'=>$name,
+                    'price'=>$price ,
+                    'details'=>$details,
+                    'meals'=> $mealsSelected,
+                    'photo' => $photoName,
+                    'restaurant_id' => $restaurant_id
+                ];
+
+                $dataInserted = [
+                    'calories'=>$calories,
+                    'name'=>$name,
+                    'price'=>$price ,
+                    'details'=>$details,
+                    'photo' => $photoName,
+                    'restaurant_id' => $restaurant_id
+                ];
+
+                $encoded= json_encode($olddata);
+                if(!empty($error))
+                {
+                    $error=json_encode($error);
+                    header("location: ../restaurants/add_package.php?errors={$error}&data={$encoded}&meals={$meals}" );
+                    exit();
+                }
+                $package = new package();
+                $package_id = $package->insert($dataInserted,$mealsSelected);
+                if($package_id) {
+                    $path = '../uploads/packages/'.$package_id;
+                    if(!is_dir($path)) {
+                        mkdir($path);
+                    }
+                    move_uploaded_file($photoTmp, '../uploads/packages/'.$package_id.'/'. $photoName);
+                    $this->showAllPackages();
+                }
+                
+            } 
+        }
+    }
+
 }

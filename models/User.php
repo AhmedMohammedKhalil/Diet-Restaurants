@@ -123,4 +123,15 @@ class User{
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getUser($id) {
+        
+        $get = $this->con->prepare("SELECT * FROM users where id = $id");
+
+		$get->execute();
+
+		$user = $get->fetch(PDO::FETCH_ASSOC);
+
+		return $user;
+    }
 }

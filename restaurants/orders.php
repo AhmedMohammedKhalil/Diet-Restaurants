@@ -26,7 +26,7 @@
                                 <div class= "list">
                                     <div class="">
                                         <h4 style="width:30%">Meal Name</h4>
-                                        <h4 style="width:30%">Restaurant Name</h4>
+                                        <h4 style="width:30%">User Name</h4>
                                         <h4 style="width:20%">Calory</h4>
                                         <h4 style="width:20%">Price</h4>
                                     </div>
@@ -35,8 +35,8 @@
                                             <h4 style="width:30%"><a href="<?php echo $cont."Controller.php?do=showMeal&id={$order['id']}" ?>">
                                                 <?php echo $order['name'] ?></a>
                                             </h4>
-                                            <h4 style="width:30%"><a href="<?php echo $cont."Controller.php?do=showRestaurant&id={$order['restaurant_id']}" ?>">
-                                                <?php echo $order['res_name']?></a>
+                                            <h4 style="width:30%"><a href="<?php echo $cont."Controller.php?do=showUserDetails&id={$order['u_id']}" ?>">
+                                                <?php echo $order['u_name']?></a>
                                             </h4>
                                             <h4 style="width:20%"><?php echo $order['calories']?> Calory</h4>
                                             <h4 style="width:20%"><?php echo $order['price']?> KD</h4>

@@ -81,10 +81,87 @@ if($action != "") {
         } else {
 
             //restaurants route
+
             if($action == 'ResLogout') {
                 $res = new RestaurantsController();
                 $res->logout();
             }
+            if($action == 'showResProfile') {
+                $res = new RestaurantsController();
+                $res->showProfile();
+            }
+            if($action == 'showResSubscribes') {
+                $res = new RestaurantsController();
+                $res->showSubscribes();
+            }
+            if($action == 'showResOrders') {
+                $res = new RestaurantsController();
+                $res->showOrders();
+            }
+            if($action == 'showResSettings') {
+                $res = new RestaurantsController();
+                $res->showSettings();
+            }
+            if($action == 'showResChangePassword') {
+                $res = new RestaurantsController();
+                $res->showChangePassword();
+            }
+            if($action == "ReschangePass") {
+                $res = new RestaurantsController();
+                $res->changePassword();
+            }
+            if($action == 'editRes') {
+                $res = new RestaurantsController();
+                $res->editrestaurant();
+            }
+            if($action == 'showUserDetails') {
+                $id = $_GET['id'];
+                $user = new UserController();
+                $user->userDetails($id);
+            }
+            if($action == "showResPackages") {
+                $packages = new PackagesController();
+                $packages->showAllPackages();
+            }
+            if($action == "showResMeals") {
+                $meals = new MealsController();
+                $meals->showAllMeals();
+            }
+            if($action == "createMeal") {
+                $meals = new MealsController();
+                $meals->createMeal();
+            }
+            if($action == "storeMeal") {
+                $meals = new MealsController();
+                $meals->storeMeal();
+            }
+            if($action == "editMeal") {
+                $id = $_GET['id'];
+                $Meal = new MealsController();
+                $Meal->editMeal($id);
+            }
+            if($action == "updateMeal") {
+                $Meal = new MealsController();
+                $Meal->updateMeal();
+            }
+            if($action == "createPackage") {
+                $package = new PackagesController();
+                $package->createPackage();
+            }
+            if($action == "storePackage") {
+                $package = new PackagesController();
+                $package->storePackage();
+            }
+            if($action == "editPackage") {
+                $id = $_GET['id'];
+                $package = new PackagesController();
+                $package->editPackage($id);
+            }
+            if($action == "updatePackage") {
+                $package = new PackagesController();
+                $package->updatePackage();
+            }
+
         }
 
     }

@@ -155,13 +155,12 @@ class UserController{
     public function updatePhoto ($userroute = '../user/') {
         if($_SERVER['REQUEST_METHOD'] == 'POST') { 
             if(isset($_POST['updatephoto'])) {
+
                 // Upload Variables
 
 				$photoName = $_FILES['photo']['name'];
 				$photoSize = $_FILES['photo']['size'];
 				$photoTmp	= $_FILES['photo']['tmp_name'];
-				$photoType = $_FILES['photo']['type'];
-
 				// List Of Allowed File Typed To Upload
 
 				$photoAllowedExtension = array("jpeg", "jpg", "png");
@@ -184,6 +183,7 @@ class UserController{
                     header("location: {$userroute}updatePhoto.php?errors={$error}" );
                     exit();
                 }
+                
                 $user_id = $_SESSION['user']['id'];
                 $oldphoto = $_SESSION['user']['photo'];
                 $path = '../uploads/users/'.$user_id;
@@ -211,7 +211,7 @@ class UserController{
         if($_SERVER['REQUEST_METHOD'] == 'POST') { 
             if(isset($_POST['change_pass'])) {
                 $password = trim($_POST['password']);
-                $confirm_password = trim($_POST['confirm_passowrd']);
+                $confirm_password = trim($_POST['confirm_password']);
                 $data = [
                     'password' => $password
                 ];
@@ -239,6 +239,14 @@ class UserController{
             }
         }
         
+    }
+
+
+    public function userDetails($id) {
+        $userModel = new User();
+        $user = base64_encode(json_encode($userModel->getUser($id)));
+        header("location: ../restaurants/user_details.php?user={$user}" );
+
     }
     public function logout()
     {

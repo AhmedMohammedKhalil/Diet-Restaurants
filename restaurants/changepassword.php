@@ -8,8 +8,7 @@
     include($inc.'landing.php');
     if(isset($_GET['errors'])) {
 		$errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);
-	}
-?>
+	}?>
 
     <section id="container">    
         <div id="main-content">
@@ -29,7 +28,7 @@
                                 }
                                 echo '</ul>';
                             }?>
-                            <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=UserchangePass" ?>">
+                            <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=ReschangePass" ?>">
                                 <div>
                                     <input type="password" name="password" id="password" placeholder="Enter Password" required="required" />
                                 </div>

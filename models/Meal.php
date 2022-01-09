@@ -49,16 +49,17 @@ class Meal{
 
     }
 
-    public function getMael($id) {
+    public function getMeal($id) {
 
         $get = $this->con->prepare("SELECT * FROM meals where id = $id");
 
 		$get->execute();
 
-		$meal = $get->fetchAll(PDO::FETCH_ASSOC);
+		$meal = $get->fetch(PDO::FETCH_ASSOC);
 
 		return $meal;
     }
+
     public function getRateForUser($meal_id,$user_id) {
         $get = $this->con->prepare("SELECT * FROM rates where type='meal' and type_id = $meal_id and user_id = $user_id");
 
@@ -111,5 +112,23 @@ class Meal{
         $query->bindParam("meal_id", $meal_id, PDO::PARAM_STR);
         $successed = $query->execute();
         return $successed;
+    }
+
+
+    public function insert($data) {
+        $dataInserted = array_values($data);
+        $query = $this->con->prepare("INSERT INTO meals(calories,name,price,weight,details,photo,restaurant_id) 
+                                    VALUES (?,?,?,?,?,?,?)");
+        $query->execute($dataInserted);
+        $id = $this->con->lastInsertId();
+        return $id;                    
+    }
+
+    public function updateMeal($data) {
+        $dataupdated = array_values($data);
+        $query = $this->con->prepare("UPDATE meals SET calories = ? , name = ? , price = ? , weight = ? , details = ? , photo = ? 
+                        where id = ? ");
+        $success = $query->execute($dataupdated);
+        return $success;
     }
 }

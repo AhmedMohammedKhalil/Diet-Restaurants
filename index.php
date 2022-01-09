@@ -8,7 +8,7 @@
     include_once('controllers/HomeController.php');
     $data = HomeController::index();
     extract($data);
-  
+    //unset($_SESSION['username']);
 ?>
     <section id="container">
                 <div id="main-content">

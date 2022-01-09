@@ -8,8 +8,6 @@
     include($inc.'landing.php');
     if($_GET['subscribes']) {
         $subscribes =json_decode(base64_decode($_GET['subscribes']),JSON_OBJECT_AS_ARRAY);
-    } else {
-        header('location: ../');
     }
 ?>
 <section id="container">
@@ -25,7 +23,7 @@
                                <div class= "list" >
                                     <div class="">
                                         <h4 style="width:30%">Package Name</h4>
-                                        <h4 style="width:30%">Restaurant Name</h4>
+                                        <h4 style="width:30%">User Name</h4>
                                         <h4 style="width:20%">start</h4>
                                         <h4 style="width:20%">end</h4>
                                     </div>
@@ -34,8 +32,8 @@
                                             <h4 style="width:30%"><a href="<?php echo $cont."Controller.php?do=showPackage&id={$subscribe['package_id']}" ?>">
                                                 <?php echo $subscribe['pack_name'] ?></a>
                                             </h4>
-                                            <h4 style="width:30%"><a href="<?php echo $cont."Controller.php?do=showRestaurant&id={$subscribe['res_id']}" ?>">
-                                                <?php echo $subscribe['res_name']?></a>
+                                            <h4 style="width:30%"><a href="<?php echo $cont."Controller.php?do=showUserDetails&id={$subscribe['u_id']}" ?>">
+                                                <?php echo $subscribe['u_name']?></a>
                                             </h4>
                                             <h4 style="width:20%"><?php echo $subscribe['start']?></h4>
                                             <h4 style="width:20%"><?php echo $subscribe['end']?></h4>

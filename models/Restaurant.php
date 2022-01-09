@@ -156,4 +156,56 @@ class Restaurant{
         $successed = $query->execute();
         return $successed;
     }
+
+
+    public function update($res_id,$data) {
+        extract($data);
+        
+        //$address = nl2br($address);
+        $query = $this->con->prepare("UPDATE restaurants SET name = :name , email = :email , address = :address , owner_name = :owner_name , phone = :phone , description = :description , photo = :photo WHERE id={$res_id}");
+        $query->bindParam("name", $name, PDO::PARAM_STR);
+        $query->bindParam("email", $email, PDO::PARAM_STR);
+        $query->bindParam("address", $address, PDO::PARAM_STR);
+        $query->bindParam("owner_name", $owner_name, PDO::PARAM_STR);
+        $query->bindParam("phone", $phone, PDO::PARAM_STR);
+        $query->bindParam("description", $description, PDO::PARAM_STR);
+        $query->bindParam("photo", $photo, PDO::PARAM_STR);
+        $successed = $query->execute();
+        return $successed;
+    }
+
+   
+
+    public function changePassword($restaurant_id,$data) {
+        extract($data);
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $query = $this->con->prepare("UPDATE restaurants SET password=:hash WHERE id={$restaurant_id}");
+        $query->bindParam("hash", $hash, PDO::PARAM_STR);
+        $successed = $query->execute();
+        return $successed;
+    }
+
+    public function getAllOrders($res_id) {
+        $query = $this->con->prepare("SELECT U.name as u_name , U.id as u_id  , M.* 
+                                    from meals M,restaurants R,users U,user_meals UM 
+                                    where R.id = :res_id and U.id = UM.user_id and M.id = UM.meal_id 
+                                    and R.id = M.restaurant_id
+                                    ");
+        $query->bindParam("res_id", $res_id, PDO::PARAM_STR);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getAllSubscribes($res_id) {
+        $query = $this->con->prepare("SELECT  U.name as u_name , U.id as u_id ,P.name as pack_name , US.*
+                                    from packages P,restaurants R,users U,user_subscripes US 
+                                    where R.id = :res_id and U.id = US.user_id and P.id = US.package_id 
+                                    and R.id = P.restaurant_id
+                                    ");
+        $query->bindParam("res_id", $res_id, PDO::PARAM_STR);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

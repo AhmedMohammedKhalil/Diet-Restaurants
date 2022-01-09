@@ -103,5 +103,48 @@ class Package{
         $successed = $query->execute();
         return $successed;
     }
+
+    public function insert($data,$meals) {
+        $dataInserted = array_values($data);
+        $query = $this->con->prepare("INSERT INTO packages(calories,name,price,details,photo,restaurant_id) 
+                                    VALUES (?,?,?,?,?,?)");
+        $query->execute($dataInserted);
+        $id = $this->con->lastInsertId();
+        foreach($meals as $m) {
+            $query = $this->con->prepare("INSERT INTO package_meals(package_id,meal_id) 
+                                    VALUES ({$id},{$m})");
+            $query->execute();
+        }
+        return $id;                    
+    }
+
+    public function getPackageById($id) {
+
+        $get = $this->con->prepare("SELECT * FROM packages where id = $id");
+
+		$get->execute();
+
+		$package = $get->fetch(PDO::FETCH_ASSOC);
+
+		return $package;
+    }
+    public function getPackageMeals($id) {
+        
+        $get = $this->con->prepare("SELECT * FROM package_meals where package_id = $id");
+
+		$get->execute();
+
+		$packagemeals = $get->fetchAll(PDO::FETCH_ASSOC);
+
+		return $packagemeals;
+    }
+
+    public function updatePackage($data) {
+        $dataupdated = array_values($data);
+        $query = $this->con->prepare("UPDATE meals SET calories = ? , name = ? , price = ? , weight = ? , details = ? , photo = ? 
+                        where id = ? ");
+        $success = $query->execute($dataupdated);
+        return $success;
+    }
 }
 

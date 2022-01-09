@@ -141,4 +141,222 @@ class MealsController {
             header('location: Controller.php?do=showUserOrders');
         }
     }
+
+    public function showAllMeals() {
+        include_once('../models/Meal.php');
+        $mealModel = new Meal();
+        $meals = base64_encode(json_encode($mealModel->getAllMeals('*','meals')));
+        header("location: ../restaurants/meals.php?meals={$meals}" );
+    }
+
+
+    public function createMeal () {
+        header("location: ../restaurants/add_meal.php" );
+    }
+
+    public function storeMeal () {
+        include_once('../models/Meal.php');
+        $restaurant_id = $_SESSION['restaurant']['id'];
+        if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            if(isset($_POST['Add_Meal'])) {
+                $name=trim($_POST['name']);
+                $calories = trim($_POST['calories']);
+                $price = trim($_POST['price']);
+                $weight = trim($_POST['weight']);
+                $details = trim($_POST['details']);
+                $photoName = $_FILES['image']['name'];
+                $error=[];
+                if (empty($name)) {
+                    array_push($error,"name required");
+                } 
+                if (!empty($name) && is_numeric($name)) {
+                    array_push($error,"name must be contains letters (not number only)");
+                } 
+                
+                if (empty($calories)) {
+                    array_push($error,"calories required");
+                }
+                if (!empty($calories) && !is_numeric($calories)) {
+                    array_push($error,"calories must be number");
+                } 
+                if (empty($price)) {
+                    array_push($error,"price required");
+                }
+                if (!empty($price) && !is_numeric($price)) {
+                    array_push($error,"price must be number");
+                } 
+                if (empty($weight)) {
+                    array_push($error,"weight required");
+                }
+                if (!empty($weight) && !is_numeric($weight)) {
+                    array_push($error,"weight must be number");
+                } 
+                
+                if (empty($details)) {
+                    array_push($error,"details required");
+                } 
+                if (empty($photoName)) { 
+                    array_push($error,"photo required");
+                } 
+                if (!empty($photoName)) {
+
+                    $photoSize = $_FILES['image']['size'];
+                    $photoTmp	= $_FILES['image']['tmp_name'];
+                    // List Of Allowed File Typed To Upload
+
+                    $photoAllowedExtension = array("jpeg", "jpg", "png");
+
+                    // Get photo Extension
+                    $explode = explode('.', $photoName);
+                    $photoExtension = strtolower(end($explode));
+                    if (! empty($photoName) && ! in_array($photoExtension, $photoAllowedExtension)) {
+                        $error[] = 'This Extension Is Not <strong>Allowed</strong>';
+                    }
+    
+                    if ($photoSize > 4194304) {
+                        $error[] = 'photo Cant Be Larger Than <strong>4MB</strong>';
+                    }
+                }
+
+                $data = [
+                    'calories'=>$calories,
+                    'name'=>$name,
+                    'price'=>$price ,
+                    'weight'=>$weight ,
+                    'details'=>$details,
+                    'photo' => $photoName,
+                    'restaurant_id' => $restaurant_id
+                ];
+
+                $encoded= json_encode($data);
+                if(!empty($error))
+                {
+                    $error=json_encode($error);
+                    header("location: ../restaurants/add_meal.php?errors={$error}&data={$encoded}" );
+                    exit();
+                }
+                $meal = new Meal();
+                $meal_id = $meal->insert($data);
+                if($meal_id) {
+                    $path = '../uploads/meals/'.$meal_id;
+                    if(!is_dir($path)) {
+                        mkdir($path);
+                    }
+                    move_uploaded_file($photoTmp, '../uploads/meals/'.$meal_id.'/'. $photoName);
+                    $this->showAllMeals();
+                }
+                
+            } 
+        }
+    }
+
+    public function editMeal ($id) {
+        include_once('../models/Meal.php');
+        $mealModel = new Meal();
+        $meal = base64_encode(json_encode($mealModel->getMeal($id)));
+        header("location: ../restaurants/update_meal.php?meal={$meal}" );
+    }
+
+    public function updateMeal () {
+        include_once('../models/Meal.php');
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            if(isset($_POST['update_Meal'])) {
+                $meal_id = trim($_POST['id']);
+                $name=trim($_POST['name']);
+                $calories = trim($_POST['calories']);
+                $price = trim($_POST['price']);
+                $weight = trim($_POST['weight']);
+                $details = trim($_POST['details']);
+                $photoName = $_FILES['image']['name'];
+                $mealModel = new Meal();
+                $meal = $mealModel->getMeal($meal_id);
+                $photo = $meal['photo'];
+                $error=[];
+                if (empty($name)) {
+                    array_push($error,"name required");
+                } 
+                if (!empty($name) && is_numeric($name)) {
+                    array_push($error,"name must be contains letters (not number only)");
+                } 
+                
+                if (empty($calories)) {
+                    array_push($error,"calories required");
+                }
+                if (!empty($calories) && !is_numeric($calories)) {
+                    array_push($error,"calories must be number");
+                } 
+                if (empty($price)) {
+                    array_push($error,"price required");
+                }
+                if (!empty($price) && !is_numeric($price)) {
+                    array_push($error,"price must be number");
+                } 
+                if (empty($weight)) {
+                    array_push($error,"weight required");
+                }
+                if (!empty($weight) && !is_numeric($weight)) {
+                    array_push($error,"weight must be number");
+                } 
+                
+                if (empty($details)) {
+                    array_push($error,"details required");
+                } 
+                if (!empty($photoName)) {
+
+                    $photoSize = $_FILES['image']['size'];
+                    $photoTmp	= $_FILES['image']['tmp_name'];
+                    // List Of Allowed File Typed To Upload
+
+                    $photoAllowedExtension = array("jpeg", "jpg", "png");
+
+                    // Get photo Extension
+                    $explode = explode('.', $photoName);
+                    $photoExtension = strtolower(end($explode));
+                    if (! empty($photoName) && ! in_array($photoExtension, $photoAllowedExtension)) {
+                        $error[] = 'This Extension Is Not <strong>Allowed</strong>';
+                    }
+    
+                    if ($photoSize > 4194304) {
+                        $error[] = 'photo Cant Be Larger Than <strong>4MB</strong>';
+                    }
+
+                    $path = '../uploads/meals/'.$meal_id;
+                    
+                }
+
+                $data = [
+                    'calories'=>$calories,
+                    'name'=>$name,
+                    'price'=>$price ,
+                    'weight'=>$weight ,
+                    'details'=>$details,
+                    'photo' => !empty($photoName) ? $photoName : $photo,
+                    'id' => $meal_id,
+                ];
+
+                $encoded= json_encode($data);
+                if(!empty($error))
+                {
+                    $error=json_encode($error);
+                    header("location: ../restaurants/update_meal.php?errors={$error}&data={$encoded}" );
+                    exit();
+                }
+                $success = $mealModel->updateMeal($data);
+                if($success) {
+                    if( !empty($photoName)) {
+                        unlink($path.'/'.$photo);
+                        move_uploaded_file($photoTmp, $path.'/'. $photoName);
+                    } 
+                    $this->showAllMeals();
+                }
+                
+
+
+
+                
+            } 
+        }
+    }
+
 }
