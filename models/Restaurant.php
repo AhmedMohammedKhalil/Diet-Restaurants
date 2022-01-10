@@ -108,7 +108,7 @@ class Restaurant{
 
 		$get->execute();
 
-		$res = $get->fetchAll(PDO::FETCH_ASSOC);
+		$res = $get->fetch(PDO::FETCH_ASSOC);
 
 		return $res;
     }

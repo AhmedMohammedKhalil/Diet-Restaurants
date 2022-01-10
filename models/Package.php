@@ -139,12 +139,54 @@ class Package{
 		return $packagemeals;
     }
 
-    public function updatePackage($data) {
+    public function updatePackage($data,$meals) {
         $dataupdated = array_values($data);
-        $query = $this->con->prepare("UPDATE meals SET calories = ? , name = ? , price = ? , weight = ? , details = ? , photo = ? 
+        extract($data);
+        $query = $this->con->prepare("UPDATE packages SET calories = ? , name = ? , price = ? , details = ? , photo = ? 
                         where id = ? ");
         $success = $query->execute($dataupdated);
+        if($success) {
+            $this->delPackageMeals($id);
+            foreach($meals as $m) {
+                $query = $this->con->prepare("INSERT INTO package_meals(package_id,meal_id) 
+                                        VALUES ({$id},{$m})");
+                $query->execute();
+            }
+        }
         return $success;
     }
+
+    public function delPackageMeals($id) {
+        $query = $this->con->prepare("Delete from package_meals where package_id = {$id}");
+		$query->execute();
+    }
+
+    public function getAllSubscribes($id) {
+        $get = $this->con->prepare("SELECT * FROM user_subscripes where package_id = $id");
+
+		$get->execute();
+
+		$subscribes = $get->fetchAll(PDO::FETCH_ASSOC);
+
+        return $subscribes;
+    }
+
+    public function delSubscribtion($id) {
+        $query = $this->con->prepare("Delete from user_subscripes where package_id = {$id}");
+		$query->execute();
+    }
+
+    public function delRates($id) {
+        $get = $this->con->prepare("DELETE FROM rates
+                            WHERE type = 'package' and type_id = $id");
+        $get->execute();
+    }
+
+    public function delete($id) {
+        $query = $this->con->prepare("Delete from packages where id = {$id}");
+		$success = $query->execute();
+        return $success;
+    }
+
 }
 

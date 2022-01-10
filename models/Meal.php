@@ -131,4 +131,57 @@ class Meal{
         $success = $query->execute($dataupdated);
         return $success;
     }
+
+
+    public function getAllpackages($id) {
+
+        $get = $this->con->prepare("SELECT p.* 
+                                    FROM packages p 
+                                    JOIN package_meals pm ON p.id = pm.package_id 
+                                    Join meals m ON pm.meal_id = m.id 
+                                    WHERE m.id = $id");
+
+		$get->execute();
+
+		$packages = $get->fetchAll(PDO::FETCH_ASSOC);
+
+		return $packages;
+    }
+
+    public function getCountMealInPackage($id) {
+        $get = $this->con->prepare("SELECT count(*) as count
+                                    FROM package_meals
+                                    WHERE package_id = $id");
+
+        $get->execute();
+
+        $packages = $get->fetch(PDO::FETCH_ASSOC);
+        $count = $packages['count'];
+        return $count;
+    }
+
+    public function delPackages($id) {
+        $get = $this->con->prepare("DELETE FROM package_meals 
+                            WHERE meal_id = $id");
+        $get->execute();
+    }
+
+    public function delRates($id) {
+        $get = $this->con->prepare("DELETE FROM rates
+                            WHERE type = 'meal' and type_id = $id");
+        $get->execute();
+    }
+
+    public function delUserMeal($id) {
+        $get = $this->con->prepare("DELETE FROM user_meals
+                            WHERE meal_id = $id");
+        $get->execute();
+    }
+
+    public function delete($id) {
+        $get = $this->con->prepare("DELETE FROM meals 
+                            WHERE id = $id");
+        $success = $get->execute();
+        return $success;
+    }
 }

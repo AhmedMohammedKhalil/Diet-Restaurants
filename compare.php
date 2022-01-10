@@ -5,14 +5,18 @@
     $pageTitle = "Restaurants Compare";
     include($inc.'header.php');
     include($inc.'landing.php');
-    $data = json_decode(base64_decode($_GET['data']),JSON_OBJECT_AS_ARRAY);
-    extract($data);
+    if(isset($_GET['data'])) {
+        $data = json_decode(base64_decode($_GET['data']),JSON_OBJECT_AS_ARRAY);
+        extract($data);
+    }
+    
     if(isset($_GET['errors'])) {
         $errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);
         $data = json_decode(base64_decode($_GET['data']),JSON_OBJECT_AS_ARRAY);
     }
     if(isset($_GET['compare'])) {
-
+        $compare = json_decode(base64_decode($_GET['compare']),JSON_OBJECT_AS_ARRAY);
+        extract($compare);
     }
 ?>
     
@@ -67,17 +71,36 @@
                                 <?php if(isset($_GET['compare'])) { ?>
                                 <hr class="line-2">
                                 <div style="display: flex;justify-content:space-around">
+                                    
                                     <div class="post" style="width: 40%;">
-                                        <img src="assets/images/res2.jpg" alt="">
-                                        <h3>Restaurant Name</h3>
-                                        <p>details</p>
-                                        <a class="button" href="restaurant.html">See All</a>
+                                        <?php
+                                            if($res1['photo'] != null)
+                                                    echo '<img src="'.$uploads.'restaurants/'.$res1['id'].'/'.$res1['photo'].'" alt="">';
+                                                else
+                                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="">'; 
+                                        ?> 
+                                        <h3><?php echo $res1['name']?></h3>
+                                        <h3><?php echo $res1['owner_name']?></h3>
+                                        <h3><?php echo $res1['phone']?></h3>
+                                        <h3><?php echo $res1['count_rating']?></h3>
+                                        <p><?php echo $res1['description']?></p>
+                                        <p><?php echo $res1['address']?></p>
+                                        <a class="button" href="<?php $cont.'Controller.php?do=showRestaurant&id='.$res1['id'] ?>">See All</a>
                                     </div>
                                     <div class="post" style="width: 40%;">
-                                        <img src="assets/images/res1.jpg" alt="">
-                                        <h3>Restaurant Name</h3>
-                                        <p>details</p>
-                                        <a class="button" href="restaurant.html">See All</a>
+                                        <?php
+                                            if($res2['photo'] != null)
+                                                    echo '<img src="'.$uploads.'restaurants/'.$res2['id'].'/'.$res2['photo'].'" alt="">';
+                                                else
+                                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="">'; 
+                                        ?>                                         
+                                        <h3><?php echo $res2['name']?></h3>
+                                        <h3><?php echo $res2['owner_name']?></h3>
+                                        <h3><?php echo $res2['phone']?></h3>
+                                        <h3><?php echo $res2['count_rating']?></h3>
+                                        <p><?php echo $res2['description']?></p>
+                                        <p><?php echo $res2['address']?></p>
+                                        <a class="button" href="<?php $cont.'Controller.php?do=showRestaurant&id='.$res2['id'] ?>">See All</a>
                                     </div>
                                 </div>
                                 <?php }?>

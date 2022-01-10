@@ -38,7 +38,7 @@
                                 }
                                 echo '</ul>';
                             }?>
-                            <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=upadatePackage" ?>" enctype="multipart/form-data">
+                            <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=updatePackage" ?>" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<?php if(isset($_GET['errors'])) {echo $data['id'];} else {echo $package['id'];} ?>">
                                 <div>
                                     <input type="text" name="name" id="name" placeholder="Enter Meal name" required="required"
@@ -94,7 +94,7 @@
                                             placeholder="Enter details"><?php if(isset($_GET['errors'])) { echo $data['details'];} else {echo $package['details'];}?></textarea>                                                    
                                 </div>
                                 <div>
-                                    <center><input class="submit" type="submit" name="update_Package" value="Add"></center>
+                                    <center><input class="submit" type="submit" name="update_Package" value="Update"></center>
                                 </div>
                             </form>
                         </div>

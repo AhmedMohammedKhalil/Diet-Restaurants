@@ -359,4 +359,31 @@ class MealsController {
         }
     }
 
+    public function delMeal($id) {
+        include_once('../models/Meal.php');
+        $error =[];
+        $meal = new Meal();
+        $packages = $meal->getAllpackages($id);
+        foreach($packages as $package) {
+            $count = $meal->getCountMealInPackage($package['id']);
+            if($count == 1) {
+                $error[] = "Connot delete Meal ,{$package['name']} is related with it";
+            } 
+        }
+        if(!empty($error)) {
+            $error=json_encode($error);
+            header('location: ../restaurants/errors.php?errors='.$error);
+        } else {
+            $meal->delPackages($id);
+            $meal->delRates($id);
+            $meal->delUserMeal($id);
+            $success = $meal->delete($id);
+            if($success) {
+                $this->showAllMeals();
+            }
+        }
+    }
+
+
+
 }

@@ -90,6 +90,8 @@ class HomeController {
         include_once('../models/Restaurant.php');
         $res = new Restaurant();
         $restaurants = $res->getAllRestaurant('id , name','restaurants');
+        if(empty($restaurants)) 
+            header('location: ../');
         $data =  base64_encode(json_encode(['restaurants' => $restaurants]));
         header('location: ../compare.php?data='.$data);
     }

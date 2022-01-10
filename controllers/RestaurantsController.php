@@ -227,6 +227,12 @@ class RestaurantsController {
                     header("location: ../compare.php?errors={$errors}&data={$data}" );
                     exit();
                 }
+                $restaurant1 = $res->getRestaurant($res1);
+                $restaurant2 = $res->getRestaurant($res2);
+                $compare = ['res1' => $restaurant1 , 'res2' => $restaurant2 , 'restaurants' => $restaurants];
+                $compare = base64_encode(json_encode($compare));
+                header("location: ../compare.php?compare={$compare}" );
+
 
                 
             }

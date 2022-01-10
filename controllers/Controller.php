@@ -144,6 +144,11 @@ if($action != "") {
                 $Meal = new MealsController();
                 $Meal->updateMeal();
             }
+            if($action == "delMeal") {
+                $id = $_GET['id'];
+                $meal = new MealsController();
+                $meal->delMeal($id);
+            }
             if($action == "createPackage") {
                 $package = new PackagesController();
                 $package->createPackage();
@@ -160,6 +165,11 @@ if($action != "") {
             if($action == "updatePackage") {
                 $package = new PackagesController();
                 $package->updatePackage();
+            }
+            if($action == "delPackage") {
+                $id = $_GET['id'];
+                $package = new PackagesController();
+                $package->delPackage($id);
             }
 
         }

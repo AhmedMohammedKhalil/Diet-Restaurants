@@ -298,13 +298,16 @@ class PackagesController {
         $meals = base64_encode(json_encode($meals));
         if($_SERVER['REQUEST_METHOD'] == 'POST') { 
             if(isset($_POST['update_Package'])) {
-                $id=trim($_POST['id']);
+                $package_id=trim($_POST['id']);
                 $name=trim($_POST['name']);
                 $calories = trim($_POST['calories']);
                 $price = trim($_POST['price']);
                 $mealsSelected = $_POST['meals'];
                 $details = trim($_POST['details']);
                 $photoName = $_FILES['image']['name'];
+                $packageModel = new Package();
+                $package = $packageModel->getPackageById($package_id);
+                $photo = $package['photo'];
                 $error=[];
                 if (empty($name)) {
                     array_push($error,"name required");
@@ -329,9 +332,7 @@ class PackagesController {
                 if (empty($details)) {
                     array_push($error,"details required");
                 } 
-                if (empty($photoName)) { 
-                    array_push($error,"photo required");
-                } 
+                
                 if (!empty($photoName)) {
 
                     $photoSize = $_FILES['image']['size'];
@@ -350,6 +351,8 @@ class PackagesController {
                     if ($photoSize > 4194304) {
                         $error[] = 'photo Cant Be Larger Than <strong>4MB</strong>';
                     }
+                    $path = '../uploads/packages/'.$package_id;
+
                 }
 
                 $olddata = [
@@ -358,8 +361,8 @@ class PackagesController {
                     'price'=>$price ,
                     'details'=>$details,
                     'meals'=> $mealsSelected,
-                    'photo' => $photoName,
-                    'restaurant_id' => $restaurant_id
+                    'photo'=>!empty($photoName) ? $photoName : $photo,
+                    'id' => $package_id
                 ];
 
                 $dataInserted = [
@@ -367,29 +370,60 @@ class PackagesController {
                     'name'=>$name,
                     'price'=>$price ,
                     'details'=>$details,
-                    'photo' => $photoName,
-                    'restaurant_id' => $restaurant_id
+                    'photo'=>!empty($photoName) ? $photoName : $photo,
+                    'id' => $package_id
                 ];
 
                 $encoded= json_encode($olddata);
                 if(!empty($error))
                 {
                     $error=json_encode($error);
-                    header("location: ../restaurants/add_package.php?errors={$error}&data={$encoded}&meals={$meals}" );
+                    header("location: ../restaurants/update_package.php?errors={$error}&data={$encoded}&meals={$meals}" );
                     exit();
                 }
+
                 $package = new package();
-                $package_id = $package->insert($dataInserted,$mealsSelected);
-                if($package_id) {
-                    $path = '../uploads/packages/'.$package_id;
-                    if(!is_dir($path)) {
-                        mkdir($path);
-                    }
-                    move_uploaded_file($photoTmp, '../uploads/packages/'.$package_id.'/'. $photoName);
+                $success = $package->updatePackage($dataInserted,$mealsSelected);
+                if($success) {
+                    if(!empty($photoName)) {
+                        $path = '../uploads/packages/'.$package_id;
+                        if(!is_dir($path)) {
+                            mkdir($path);
+                        }
+                        unlink($path.'/'.$photoName);
+                        move_uploaded_file($photoTmp, '../uploads/packages/'.$package_id.'/'. $photoName);
+                    } 
                     $this->showAllPackages();
                 }
                 
             } 
+        }
+    }
+
+
+    public function delPackage($id) {
+        include_once('../models/Package.php');
+        $error =[];
+        $package = new Package();
+        $subscribes = $package->getAllSubscribes($id);
+        foreach($subscribes as $subscribe) {
+            $endDate = new DateTime($subscribe['end']);
+            $now = new DateTime();
+            if($endDate > $now) {
+                $error[] = "Connot delete Package , there is User subscribed it and his subscription ended at {$subscribe['end']}";
+            } 
+        }
+        if(!empty($error)) {
+            $error=json_encode($error);
+            header('location: ../restaurants/errors.php?errors='.$error);
+        } else {
+            $package->delSubscribtion($id);
+            $package->delRates($id);
+            $package->delpackageMeals($id);
+            $success = $package->delete($id);
+            if($success) {
+                $this->showAllPackages();
+            }
         }
     }
 
