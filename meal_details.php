@@ -42,7 +42,7 @@
                                 <h5><?php echo $meal['weight']?> KG</h5>
                             </div>
                             <div style="padding-top:10px">
-                                <p style="margin: 0;"><?php echo $meal['details']?></p>
+                                <p style="margin: 0;"><?php echo nl2br($meal['details'])?></p>
                             </div>
                             <?php if(!isset($_SESSION['username'])) { ?>
                             <div style="padding-top:10px">

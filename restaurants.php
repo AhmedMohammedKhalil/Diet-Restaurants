@@ -35,7 +35,7 @@
                                 echo '<h3>'.$res['name'].'</h3>';
                                 echo '<h3>rating :'.$res['count_rating'].'</h3>';
                                 echo '<h3 style="margin: 10px 0;">'.$res['owner_name'].'</h3>';
-                                echo '<h5 style="margin: 15px 0;">'.$res['address'].'</h5>';
+                                echo '<p style="margin: 15px 0;">'.nl2br($res['address']).'</p>';
                                 echo '<a class="button" href="'.$cont.'Controller.php?do=showRestaurant&id='.$res['id'].'">See All</a>';
                             echo'</div>';
                         }

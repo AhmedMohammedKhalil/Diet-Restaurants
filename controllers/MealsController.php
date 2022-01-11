@@ -379,6 +379,10 @@ class MealsController {
             $meal->delUserMeal($id);
             $success = $meal->delete($id);
             if($success) {
+                $dirname="../uploads/meals/{$id}";
+                array_map("unlink", glob("$dirname/*"));
+                array_map("rmdir", glob("$dirname/*"));
+                rmdir($dirname);
                 $this->showAllMeals();
             }
         }

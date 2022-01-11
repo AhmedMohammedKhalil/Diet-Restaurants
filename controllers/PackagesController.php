@@ -422,6 +422,10 @@ class PackagesController {
             $package->delpackageMeals($id);
             $success = $package->delete($id);
             if($success) {
+                $dirname="../uploads/packages/{$id}";
+                array_map("unlink", glob("$dirname/*"));
+                array_map("rmdir", glob("$dirname/*"));
+                rmdir($dirname);
                 $this->showAllPackages();
             }
         }

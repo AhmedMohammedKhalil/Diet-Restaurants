@@ -25,7 +25,18 @@ hr.line-2{background: #333;max-width: 40px;height: 4px;}
 
 body {font: 14px/25px Arial, Helvetica, sans-serif;font-family: 'Open Sans', sans-serif;background: #F6F6F5 url("../images/bg.jpg") repeat 0 0;}
 
-
+.text-overflow {
+	overflow: hidden;
+	  text-overflow: ellipsis;
+	  display: -webkit-box;
+	  height: 93px;
+	  text-align: justify;
+	  font-size: 16px;
+	  -webkit-line-clamp: 4;
+	  -webkit-box-orient: vertical;
+	  padding: 3px;
+  
+  }
 .logo-header a:hover {color: #333333 !important;}
 .heading{text-align: center; margin: 20px 0; }
 .heading .logo {color: #fff;padding: 45px 0 30px;}

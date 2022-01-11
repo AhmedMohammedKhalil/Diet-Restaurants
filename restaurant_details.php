@@ -39,10 +39,10 @@
                             <h5><?php echo $restaurant['phone']?></h5>
                         </div>
                         <div style="padding-top:10px">
-                            <p style="margin: 0;"><?php echo $restaurant['address']?></p>
+                            <p style="margin: 0;"><?php echo nl2br($restaurant['address'])?></p>
                         </div>
                         <div style="padding-top:10px">
-                            <p style="margin: 0;"><?php echo $restaurant['description']?></p>
+                            <p style="margin: 0;"><?php echo nl2br($restaurant['description'])?></p>
                         </div>
                         <?php if(!isset($_SESSION['username'])) { ?>
                         <div style="padding-top:10px">

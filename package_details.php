@@ -37,7 +37,7 @@
                             <h5><?php echo $package['price']?> KD</h5>
                         </div>
                         <div style="padding-top:10px">
-                            <p style="margin: 0;"><?php echo $package['details']?></p>
+                            <p style="margin: 0;"><?php echo nl2br($package['details'])?></p>
                         </div>
                         <?php if(!isset($_SESSION['username'])) { ?>
                         <div style="padding-top:10px">
