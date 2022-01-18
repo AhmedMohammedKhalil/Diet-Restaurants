@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2022 at 10:39 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Jan 19, 2022 at 12:27 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,13 @@ CREATE TABLE `meals` (
 --
 
 INSERT INTO `meals` (`id`, `name`, `photo`, `details`, `price`, `calories`, `weight`, `count_rating`, `restaurant_id`) VALUES
-(2, 'meal', 'menu-13.jpg', 'details', 150, 15, 0.55, 0, 2);
+(3, 'Keto Creamy Pepper Steak', 'CreamyPepperSteakherorsz_2000x.png', 'While we take extreme measures to ensure our food is free of allergens please be aware that our production facility does handle Fish, Crustacean, Sesame Seeds, Soybeans, Egg, Peanuts, Gluten, Treenuts and Sulphites.\r\n\r\nKeep food chilled between 0 – 4 degrees Celsius at all times before heating, consume within the use-by date.', 5.1, 473, 200, 0, 1),
+(4, 'Keto Chicken w Lemon Herb', 'download.png', 'Lemon Herb Chicken', 10, 200, 120, 0, 1),
+(5, 'KETO BUFFALO CHICKEN W BLUE CHEESE RISOTTO', 'BuffaloChickenherorsz_2000x.png', 'Enjoy the famous Buffalo flavour with these succulent chicken tenders!\r\nThe Chicken tenders are marinated in a selection of spices and served on a creamy red sauce, sided with a charmingly flavoured blue cheese risotto made using broccoli and cauliflower', 6, 250, 100, 0, 2),
+(6, 'CHICKEN KATSU', 'KatsuChicken_Eating_March2021_01copy_2000x.jpg', 'CHICKEN KATSU details', 8, 180, 88, 0, 2),
+(7, 'BEEF & BACON SPAGHETTI BOLOGNESE', 'Beef_BaconSpagBol_Eating_March2021_01copy_2000x.jpg', 'Of course no menu is complete without a hearty spag bol! We’ve combined juicy, protein-rich beef and bacon meatballs and let them cook in a flavoursome sauce. With fettuccine pasta and a parmesan cheese top to finish. Just sit back, relax and enjoy the bold flavours of Italia from your dinner table.', 6, 500, 200, 0, 3),
+(8, 'KETO BEEF TACO CASSEROLE', 'TacoBeefCasseroleHerorsz_17c964c4-23ce-4474-94d2-eb5ef4dd6c9d_2000x.png', 'KETO BEEF TACO CASSEROLE KETO BEEF TACO CASSEROLE', 10, 660, 150, 0, 3),
+(9, 'KAWAKAWA CHICKEN & STUFFING', 'kawakawa-chicken-WEB_2000x.jpg', 'KAWAKAWA CHICKEN & STUFFING KAWAKAWA CHICKEN & STUFFING KAWAKAWA CHICKEN & STUFFING', 6, 212, 125, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -68,7 +74,10 @@ CREATE TABLE `packages` (
 --
 
 INSERT INTO `packages` (`id`, `name`, `price`, `calories`, `details`, `count_rating`, `photo`, `restaurant_id`) VALUES
-(3, 'sswdsd', 55, 55, 'sdsdsd', 0, 'menu-13.jpg', 2);
+(3, 'Keto Chap Pack', 55, 55, 'sdsdsd', 0, 'HeroPackMaster10MealsKETO_400x.png', 2),
+(4, 'Keto Hero 10 - Maxi', 65, 500, 'keto hero package', 0, 'Capture.JPG', 1),
+(5, 'Beef', 29, 500, 'Beef Package', 0, 'BuffaloChickenherorsz_2000x.png', 2),
+(6, 'Succulent chicken package', 55, 600, 'Succulent chicken package Succulent chicken package Succulent chicken package Succulent chicken package', 0, 'CreamyPepperSteakherorsz_2000x.png', 3);
 
 -- --------------------------------------------------------
 
@@ -87,7 +96,14 @@ CREATE TABLE `package_meals` (
 --
 
 INSERT INTO `package_meals` (`id`, `meal_id`, `package_id`) VALUES
-(7, 2, 3);
+(9, 3, 4),
+(10, 4, 4),
+(11, 3, 3),
+(12, 4, 3),
+(13, 5, 5),
+(14, 6, 5),
+(15, 8, 6),
+(16, 9, 6);
 
 -- --------------------------------------------------------
 
@@ -135,10 +151,10 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `name`, `address`, `email`, `phone`, `owner_name`, `photo`, `description`, `count_rating`, `password`) VALUES
-(1, 'Qayssars', 'kuwait city', 'qayssar@gmail.com', '659321', 'Talal Aabed', 'res2.jpg', 'details about restaurants', 0, '$2y$10$/Nr6La57vBGmqbG.mhIglufVR/S37VYrNlHqjsTPFXCTisURwwmWS'),
-(2, 'Fish Restaurant', 'kuwait city', 'adam@yahoo.com', '695124', 'adam abdalla', 'res2.jpg', 'details about restaurant', 1.4, '$2y$10$k2nRYafQFPxT7PmkEIh5VusBAG5WuEVQRQWgl48dQm78cW58peMtS'),
-(3, 'erwrwer', 'sdfsdfds', 'a.m.k.y.2013@gmail.com', '123456', 'werewrewr', NULL, 'dsfdsfds', 0, '$2y$10$FQeRpD83hfj/KjXjYB71Fe1xUU0LoTudxzea.6r.3qhVzywOvVRMi'),
-(4, 'asdas', 'adasdsad', 'a.m.k.ysdsa.2013@gmail.com', '123458', 'asdsad', NULL, 'asdasd', 3, '$2y$10$k2nRYafQFPxT7PmkEIh5VusBAG5WuEVQRQWgl48dQm78cW58peMtS');
+(1, 'The Breakfast Club‬', 'kuwait city', 'clubbreak@gmail.com', '659321', 'Talal Aabed', 'res2.jpg', 'details about restaurants', 0, '$2y$10$0mp7F06mxE.HK/fNcDQzaeYYm7dgEx1ukoHDOFYktl.oVWx0B9UI.'),
+(2, 'Maki Marina Waves‬', 'kuwait city', 'hadymarina@yahoo.com', '695124', 'hady abdalla', 'maki.jpg', 'details about restaurant', 1.4, '$2y$10$k2nRYafQFPxT7PmkEIh5VusBAG5WuEVQRQWgl48dQm78cW58peMtS'),
+(3, 'Takooz', 'kuwait city', 'takooz@gmail.com', '123456', 'amaar saadoon', NULL, 'dsfdsfds', 0, '$2y$10$FQeRpD83hfj/KjXjYB71Fe1xUU0LoTudxzea.6r.3qhVzywOvVRMi'),
+(4, 'Roots Restaurant ', 'kuwait, khafagy', 'roots12@gmail.com', '123458', 'talaal saramad', NULL, 'asdasd', 3, '$2y$10$k2nRYafQFPxT7PmkEIh5VusBAG5WuEVQRQWgl48dQm78cW58peMtS');
 
 -- --------------------------------------------------------
 
@@ -266,19 +282,19 @@ ALTER TABLE `user_subscripes`
 -- AUTO_INCREMENT for table `meals`
 --
 ALTER TABLE `meals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `package_meals`
 --
 ALTER TABLE `package_meals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `rates`
