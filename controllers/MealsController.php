@@ -144,8 +144,9 @@ class MealsController {
 
     public function showAllMeals() {
         include_once('../models/Meal.php');
+        $restaurant_id = $_SESSION['restaurant']['id'];
         $mealModel = new Meal();
-        $meals = base64_encode(json_encode($mealModel->getAllMeals('*','meals')));
+        $meals = base64_encode(json_encode($mealModel->getAllMeals('*','meals','where restaurant_id ='.$restaurant_id)));
         header("location: ../restaurants/meals.php?meals={$meals}" );
     }
 

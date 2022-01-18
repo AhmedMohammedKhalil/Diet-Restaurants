@@ -151,8 +151,9 @@ class PackagesController {
 
     public function showAllPackages() {
         include_once('../models/Package.php');
+        $restaurant_id = $_SESSION['restaurant']['id'];
         $packageModel = new Package();
-        $packages = base64_encode(json_encode($packageModel->getAllPackages('*','packages')));
+        $packages = base64_encode(json_encode($packageModel->getAllPackages('*','packages','where restaurant_id ='.$restaurant_id)));
         header("location: ../restaurants/packages.php?packages={$packages}" );
     }
 
