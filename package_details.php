@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt=""/>
+                            <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt="package photo"/>
                         </a>
                     </div>
                 <?php }?>

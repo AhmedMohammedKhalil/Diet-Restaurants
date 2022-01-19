@@ -30,22 +30,27 @@
 									<div class="form">
 										<form name="form1" method="Post" action="<?php echo $cont."Controller.php?do=userRegister" ?>">
 											<div>
-												<input type="text" name="name" id="name" placeholder="Enter name" required="required" 
+												<label for="name">Name :</label>
+												<input type="text" name="name" id="name" placeholder="Enter name" title="Enter name" required="required" 
 												value="<?php if(isset($errors)){echo $data['name'];}?>"/>
 											</div>
 											<div>
-												<input type="email" name="email" id="email" placeholder="Enter email" required="required" 
+												<label for="email">Email :</label>
+												<input type="email" name="email" id="email" placeholder="Enter email" title="Enter email" required="required" 
 												value="<?php if(isset($errors)){echo $data['email'];}?>"/>
 											</div>
 											<div>
-												<input type="password" name="password" id="password" placeholder="Enter Password" required="required" />
+												<label for="password">Password :</label>
+												<input type="password" name="password" id="password" placeholder="Enter Password" title="Enter Password" required="required" />
 											</div>
 											<div>
-												<input type="password" name="confirm_password" id="password" placeholder="Enter password again" required="required" />
+												<label for="confirm_password">Confirm Password :</label>
+												<input type="password" name="confirm_password" id="confirm_password" placeholder="Enter password again" title="Enter password again" required="required" />
 											</div>
 											<div>
+												<label for="address">Address :</label>
 												<textarea name="address" id="address" class="form-control" rows="6" required="required"
-													placeholder="Enter Address"><?php if(isset($errors)){echo $data['address'];}?></textarea>                                                    
+													placeholder="Enter Address" title="Enter Address"><?php if(isset($errors)){echo $data['address'];}?></textarea>                                                    
 											</div>
 											<div>
 												<span>If you have account <a href="<?php echo $cont."Controller.php?do=showUserLogin" ?>">Sign In</a></span>

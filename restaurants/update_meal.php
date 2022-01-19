@@ -43,27 +43,33 @@
                             <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=updateMeal" ?>" enctype="multipart/form-data">
                                 <input type="hidden" name="id" value="<?php if(isset($_GET['errors'])) {echo $data['id'];} else {echo $meal['id'];} ?>">
                                 <div>
-                                    <input type="text" name="name" id="name" placeholder="Enter Meal name" required="required"
+                                    <label for="name">Name :</label>
+                                    <input type="text" name="name" id="name" placeholder="Enter Meal name" title="Enter Meal name" required="required"
                                         value="<?php if(isset($_GET['errors'])) {echo $data['name'];} else {echo $meal['name'];} ?>"/>
                                 </div>
                                 <div>
-                                    <input type="number" name="calories" min="0.01" step="0.01" id="calories" placeholder="Enter Calories" required="required"
+                                    <label for="calories">Calories :</label>
+                                    <input type="number" name="calories" min="0.01" step="0.01" id="calories" placeholder="Enter Calories" title="Enter Calories" required="required"
                                         value="<?php if(isset($_GET['errors'])) {echo $data['calories'] ;} else {echo $meal['calories'];}?>"/>
                                 </div>
                                 <div>
-                                    <input type="number" name="price" min="0.1" step="0.1" id="price" placeholder="Enter price" required="required"
+                                    <label for="price">Price :</label>
+                                    <input type="number" name="price" min="0.1" step="0.1" id="price" placeholder="Enter price" title="Enter price" required="required"
                                         value="<?php if(isset($_GET['errors'])) {echo $data['price'] ;} else {echo $meal['price'];}?>"/>
                                 </div>                                  
                                 <div>
-                                    <input type="number" name="weight" min="0.01" step="0.01" id="weight" placeholder="Enter weight" required="required"
+                                    <label for="weight">Weight :</label>
+                                    <input type="number" name="weight" min="0.01" step="0.01" id="weight" placeholder="Enter weight" title="Enter weight" required="required"
                                         value="<?php if(isset($_GET['errors'])) {echo $data['weight'] ;} else {echo $meal['weight'];}?>"/>
                                 </div>
                                 <div>
-                                    <input type="file" name="image" id="image">
+                                    <label for="image">Image :</label>
+                                    <input type="file" name="image" title="upload photo" id="image">
                                 </div>
                                 <div>
+                                    <label for="details">Details :</label>
                                     <textarea name="details" id="details" class="form-control" rows="6" required="required"
-                                            placeholder="Enter details"><?php if(isset($_GET['errors'])) {echo $data['details'] ;} else {echo $meal['details'];}?></textarea>                                                    
+                                            placeholder="Enter details" title="Enter details"><?php if(isset($_GET['errors'])) {echo $data['details'] ;} else {echo $meal['details'];}?></textarea>                                                    
                                 </div>
                                 <div>
                                     <center><input class="submit" type="submit" name="update_Meal" value="Update"></center>

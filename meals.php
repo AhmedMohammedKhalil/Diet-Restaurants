@@ -42,7 +42,8 @@
                                             }?>
                                         <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=filterMeals" ?>">
                                                 <div class="searching">
-                                                    <input type="search" name="search" id="search" placeholder="Make Search for Meals"
+                                                    <label for="search">Search :</label>
+                                                    <input type="search" name="search" id="search"  title="Make Search for Meals" placeholder="Search for Meals"
                                                         value="<?php if(isset($search)) { echo $search; }?>"/>
                                                 </div>
                                             <div>
@@ -51,7 +52,7 @@
                                                 </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price1" value="1"
+                                                            <input type="checkbox" name="price[]" id="price1"title="check price"  value="1"
                                                                 <?php if(isset($price) && in_array('1',$price)) {echo 'checked';} ?>/>
                                                             <span>0 to 500</span>	
                                                         </label>	
@@ -59,7 +60,7 @@
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price2" value="2"
+                                                            <input type="checkbox" name="price[]" id="price2"title="check price"  value="2"
                                                                 <?php if(isset($price) && in_array('2',$price)) {echo 'checked';} ?>/>
 
                                                             <span>500 to 1500</span>	
@@ -67,7 +68,7 @@
                                                     </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price3" value="3"
+                                                            <input type="checkbox" name="price[]" id="price3"title="check price"  value="3"
                                                                 <?php if(isset($price) && in_array('3',$price)) {echo 'checked';} ?>/>
 
                                                             <span>1500 to 2500</span>	
@@ -75,7 +76,7 @@
                                                     </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price4" value="4"
+                                                            <input type="checkbox" name="price[]" id="price4" title="check price" value="4"
                                                                 <?php if(isset($price) && in_array('4',$price)) {echo 'checked';} ?>/>
 
                                                             <span>2500 to 3500</span>	
@@ -84,7 +85,7 @@
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="price[]" id="price5" value="5"
+                                                            <input type="checkbox" name="price[]" id="price5" title="check price" value="5"
                                                                 <?php if(isset($price) && in_array('5',$price)) {echo 'checked';} ?>/>
 
                                                             <span>3500 to up</span>	
@@ -97,7 +98,7 @@
                                                 </div>
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="calories[]" id="calories1" value="1"
+                                                            <input type="checkbox" name="calories[]" id="calories1"  title="check Calories"  value="1"
                                                                 <?php if(isset($calories) && in_array('1',$calories)) {echo 'checked';} ?>/>
                                                             <span>0 to 500</span>	
                                                         </label>	
@@ -105,7 +106,7 @@
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="calories[]" id="calories2" value="2"
+                                                            <input type="checkbox" name="calories[]" id="calories2"  title="check Calories" value="2"
                                                                 <?php if(isset($calories) && in_array('2',$calories)) {echo 'checked';} ?>/>
 
                                                             <span>500 to 1500</span>	
@@ -114,7 +115,7 @@
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="calories[]" id="calories3" value="3"
+                                                            <input type="checkbox" name="calories[]" id="calories3" title="check Calories"  value="3"
                                                                 <?php if(isset($calories) && in_array('3',$calories)) {echo 'checked';} ?>/>
 
                                                             <span>1500 to 2500</span>	
@@ -123,7 +124,7 @@
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="calories[]" id="calories4" value="4"
+                                                            <input type="checkbox" name="calories[]" id="calories4" title="check Calories"  value="4"
                                                                 <?php if(isset($calories) && in_array('4',$calories)) {echo 'checked';} ?>/>
 
                                                             <span>2500 to 3500</span>	
@@ -132,7 +133,7 @@
                                                 
                                                     <div  style="text-align: left;">
                                                         <label class="flex">
-                                                            <input type="checkbox" name="calories[]" id="calories5" value="5"
+                                                            <input type="checkbox" name="calories[]" id="calories5" title="check Calories"  value="5"
                                                                 <?php if(isset($calories) && in_array('5',$calories)) {echo 'checked';} ?>/>
 
                                                             <span>3500 to up</span>	
@@ -164,7 +165,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt=""/>
+                                            <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt="meal photo"/>
                                         </a>
                                     </div>
                                 <?php }?>

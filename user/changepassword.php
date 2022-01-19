@@ -31,10 +31,12 @@
                             }?>
                             <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=UserchangePass" ?>">
                                 <div>
-                                    <input type="password" name="password" id="password" placeholder="Enter Password" required="required" />
+                                    <label for="password">Password :</label>
+                                    <input type="password" name="password" id="password" placeholder="Enter Password" title="Enter Password" required="required" />
                                 </div>
                                 <div>
-                                    <input type="password" name="confirm_password" id="co_password" placeholder="Enter password again" required="required" />
+                                    <label for="co_password">Confirm password :</label>
+                                    <input type="password" name="confirm_password" id="co_password" placeholder="Enter password again" title="Enter password again" required="required" />
                                 </div>
                                 <div>
                                     <center><input class="submit" type="submit" name="change_pass" value="Change Password"></center>

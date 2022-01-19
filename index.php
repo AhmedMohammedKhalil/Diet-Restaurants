@@ -38,7 +38,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt=""/>
+                                    <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt="meal photo"/>
                                 </a>
                             </div>
                         <?php }?>
@@ -59,7 +59,7 @@
                         <div class="art-content flex">
                             <?php foreach($packages as $package)  {
                                     echo '<div class="post">';
-                                        echo '<img src="'.$uploads.'packages/'.$package['id'].'/'.$package['photo'].'" alt="">';
+                                        echo '<img src="'.$uploads.'packages/'.$package['id'].'/'.$package['photo'].'" alt="packages photo">';
                                         echo '<h3>'.$package['name'].'</h3>';
                                         echo '<h3>rating :'.$package['count_rating'].'</h3>';
                                         echo '<h3 style="margin: 10px 0;">'.$package['calories'].' Calories</h3>';

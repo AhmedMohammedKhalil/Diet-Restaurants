@@ -21,9 +21,9 @@
                                 <div class="art-content flex" style="flex-direction: column;">
                                     <div style="padding-right:20px">
                                         <?php if($_SESSION['restaurant']['photo']  == null) {?>
-                                            <img src="<?php echo $uploads.'restaurants/res1.jpg'?>" alt="" >
+                                            <img src="<?php echo $uploads.'restaurants/res1.jpg'?>" alt="restaurants photo" >
                                         <?php }else{ ?>
-                                            <img src="<?php echo $uploads.'restaurants/'.$_SESSION['restaurant']['id'].'/'.$_SESSION['restaurant']['photo'] ?>" alt="">
+                                            <img src="<?php echo $uploads.'restaurants/'.$_SESSION['restaurant']['id'].'/'.$_SESSION['restaurant']['photo'] ?>" alt="restaurants photo">
                                         <?php }?>
                                     </div>
                                     <div class="" style="text-align:left">

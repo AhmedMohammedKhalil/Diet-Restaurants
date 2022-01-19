@@ -42,22 +42,27 @@
                             }?>
                             <form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=storePackage" ?>" enctype="multipart/form-data">
                                 <div>
-                                    <input type="text" name="name" id="name" placeholder="Enter Meal name" required="required"
+                                    <label for="name">Name :</label>
+                                    <input type="text" name="name" id="name" placeholder="Enter Package name" title="Enter Package name" required="required"
                                         value="<?php if(isset($_GET['errors'])) echo $data['name']?>"/>
                                 </div>
                                 <div>
-                                    <input type="number" name="calories" min="0.01" step="0.01" id="calories" placeholder="Enter Calories" required="required"
+                                    <label for="calories">Calories :</label>
+                                    <input type="number" name="calories" min="0.01" step="0.01" id="calories" placeholder="Enter Calories" title="Enter Calories" required="required"
                                         value="<?php if(isset($_GET['errors'])) echo $data['calories']?>"/>
                                 </div>
                                 <div>
-                                    <input type="number" name="price" min="0.1" step="0.1" id="price" placeholder="Enter price" required="required"
+                                    <label for="price">Price :</label>
+                                    <input type="number" name="price" min="0.1" step="0.1" id="price" placeholder="Enter price" title="Enter price" required="required"
                                         value="<?php if(isset($_GET['errors'])) echo $data['price']?>"/>
                                 </div>                                
                                 <div>
-                                    <input type="file" name="image" id="image" required>
+                                    <label for="image">Image :</label>
+                                    <input type="file" name="image" id="image" title="upload photo" required>
                                 </div>
                                 <div>
-                                    <select name="meals[]" id="meals" multiple required style="height: 200px;width:60%">
+                                    <label for="meals">Meals :</label>
+                                    <select name="meals[]" id="meals" title="choose Meals for Package" multiple required style="height: 200px;width:60%">
                                         <?php 
                                             if(isset($_GET['errors'])) {
                                                 foreach($meals as $meal) {
@@ -82,8 +87,9 @@
                                     </select>
                                 </div>
                                 <div>
+                                    <label for="details">Details :</label>
                                     <textarea name="details" id="details" class="form-control" rows="6" required="required"
-                                            placeholder="Enter details"><?php if(isset($_GET['errors'])) echo $data['details']?></textarea>                                                    
+                                            placeholder="Enter details" title="Enter details"><?php if(isset($_GET['errors'])) echo $data['details']?></textarea>                                                    
                                 </div>
                                 <div>
                                     <center><input class="submit" type="submit" name="Add_Package" value="Add"></center>

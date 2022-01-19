@@ -30,7 +30,8 @@
 									}?>
 									<form name="form1" method="POST" action="<?php echo $cont."Controller.php?do=userUpdatePhoto" ?>" enctype="multipart/form-data">
 										<div>
-											<input type="file" name="photo" id="photo" required="required" accept="image/jpg,image/jpeg,image/png"/>
+                                            <label for="photo">photo</label>
+											<input type="file" name="photo" id="photo" title="upload photo" required="required" accept="image/jpg,image/jpeg,image/png"/>
 										</div>
                                         <br>
                                         <br>

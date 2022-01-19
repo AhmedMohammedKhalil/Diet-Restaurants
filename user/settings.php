@@ -33,17 +33,20 @@
 										echo '</ul>';
 									}?>
 									<form name="form1"  method="POST" action="<?php echo $cont."Controller.php?do=editUser" ?>">
-										<div>
-											<input type="text" name="name" id="name" placeholder="Enter name" required="required"
+										<div>												
+                                            <label for="name">Name :</label>
+											<input type="text" name="name" id="name" placeholder="Enter name" title="Enter name" required="required"
                                                 value="<?php if(isset($errors)) {echo $data['name']; } else { echo $_SESSION['username'];}?>"/>
 										</div>
-										<div>
-											<input type="email" name="email" id="email" placeholder="Enter email" required="required"
+										<div>								
+                                            <label for="email">Email :</label>
+											<input type="email" name="email" id="email" placeholder="Enter email" title="Enter email" required="required"
                                                 value="<?php if(isset($errors)) {echo $data['email']; } else { echo $_SESSION['user']['email'];}?>"/>
 										</div>
-										<div>
+										<div>				
+                                            <label for="address">Address :</label>
 											<textarea name="address" id="address" class="form-control" rows="6" required="required"
-												placeholder="Enter Address"><?php if(isset($errors)) {echo $data['address']; } else { echo $_SESSION['user']['address'];}?></textarea>                                                    
+												placeholder="Enter Address" title="Enter Address"><?php if(isset($errors)) {echo $data['address']; } else { echo $_SESSION['user']['address'];}?></textarea>                                                    
 										</div>
 										<div>
 											<center><input class="submit" type="submit" name="userEdit" value="Save Changes"></center>

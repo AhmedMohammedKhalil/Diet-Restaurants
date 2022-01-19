@@ -30,35 +30,41 @@
 								<div class="form">
 									<form name="form1"  method="Post" action="<?php echo $cont."Controller.php?do=resRegister" ?>">
 										<div>
-											<input type="text" name="name" id="name" placeholder="Enter Restaurant name" required="required" value="<?php if(isset($errors)){echo $data['name'];}?>"/>
+											<label for="name">Name :</label>
+											<input type="text" name="name" id="name" placeholder="Enter Restaurant name" title="Enter Restaurant name" required="required" value="<?php if(isset($errors)){echo $data['name'];}?>"/>
 										</div>
 										<div>
-											<input type="text" name="owner_name" id="owner_name" placeholder="Enter Owner name" required="required" 
+											<label for="owner_name">Owner Name :</label>
+											<input type="text" name="owner_name" id="owner_name" placeholder="Enter Owner name" title="Enter Owner name" required="required" 
 											value="<?php if(isset($errors)){echo $data['owner_name'];}?>" />
 										</div>
 										<div>
-											<input type="email" name="email" id="email" placeholder="Enter email" required="required" 
+											<label for="email">Email :</label>
+											<input type="email" name="email" id="email" placeholder="Enter email" title="Enter email" required="required" 
 											value="<?php if(isset($errors)){echo $data['email'];}?>"/>
 										</div>
 										<div>
-											<input type="text" name="phone" id="phone" placeholder="Enter phone" required="required"
+											<label for="phone">Phone :</label>
+											<input type="text" name="phone" id="phone" placeholder="Enter phone" title="Enter phone" required="required"
 											value="<?php if(isset($errors)){echo $data['phone'];}?>" />
 										</div>
 										<div>
+											<label for="address">Address :</label>
 											<textarea name="address" id="address" class="form-control" rows="6" required="required"
-													placeholder="Enter Address"><?php if(isset($errors)){echo $data['address'];}?></textarea>                                                    
-
+													placeholder="Enter Address" title="Enter Address"><?php if(isset($errors)){echo $data['address'];}?></textarea>                                                    
 										</div>
 										<div>
+											<label for="description">Description :</label>
 											<textarea name="description" id="description" class="form-control" rows="7" required="required"
-													placeholder="Enter Description about Restaurant"><?php if(isset($errors)){echo $data['description'];}?></textarea>                                                    
-
+													placeholder="Enter Description about Restaurant" title="Enter Description about Restaurant"><?php if(isset($errors)){echo $data['description'];}?></textarea>                                                    
 										</div>
 										<div>
-											<input type="password" name="password" id="password" placeholder="Enter Password" required="required" />
+											<label for="password">Password :</label>
+											<input type="password" name="password" id="password" placeholder="Enter Password" title="Enter Password" required="required" />
 										</div>
 										<div>
-											<input type="password" name="confirm_password" id="confirm_password" placeholder="Enter password again" required="required" />
+											<label for="co_password">Confirm password :</label>
+											<input type="password" name="confirm_password" id="co_password" placeholder="Enter password again" title="Enter password again" required="required" />
 										</div>
 										<div>
 											<span>If you have account <a href="<?php echo $cont."Controller.php?do=showResLogin" ?>">Sign In</a></span>

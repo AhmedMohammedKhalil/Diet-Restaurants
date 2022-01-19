@@ -22,9 +22,9 @@
                     <div style="width: 50%;padding-right:20px">
                         <?php
                             if($restaurant['photo'] != null)
-                                    echo '<img src="'.$uploads.'restaurants/'.$restaurant['id'].'/'.$restaurant['photo'].'" alt="">';
+                                    echo '<img src="'.$uploads.'restaurants/'.$restaurant['id'].'/'.$restaurant['photo'].'" alt="restaurant photo">';
                                 else
-                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="">'; 
+                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="restaurant photo">'; 
                         ?> 
                     </div>
                     
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt=""/>
+                            <img class="example-image" src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo']?>" alt="meal photo"/>
                         </a>
                     </div>
                 <?php }?>
@@ -104,7 +104,7 @@
                 <div class="art-content flex">
                     <?php foreach($packages as $package)  {
                             echo '<div class="post">';
-                                echo '<img src="'.$uploads.'packages/'.$package['id'].'/'.$package['photo'].'" alt="">';
+                                echo '<img src="'.$uploads.'packages/'.$package['id'].'/'.$package['photo'].'" alt="package photo">';
                                 echo '<h3>'.$package['name'].'</h3>';
                                 echo '<h3>rating :'.$package['count_rating'].'</h3>';
                                 echo '<h3 style="margin: 10px 0;">'.$package['calories'].' Calories</h3>';

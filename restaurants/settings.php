@@ -36,31 +36,38 @@
                                         
 
 										<div>
-											<input type="text" name="name" id="name" placeholder="Enter Restaurant name" required="required"
+                                            <label for="name">Name :</label>
+											<input type="text" name="name" id="name" placeholder="Enter Restaurant name" title="Enter Restaurant name" required="required"
                                                 value="<?php if(isset($errors)) {echo $data['name']; } else { echo $_SESSION['username'];}?>"/>
 										</div>
                                         <div>
-											<input type="text" name="owner_name" id="owner_name" placeholder="Enter Owner name" required="required" 
+                                            <label for="owner_name">Owner Name :</label>
+											<input type="text" name="owner_name" id="owner_name" placeholder="Enter Owner name" title="Enter Owner name" required="required" 
                                             value="<?php if(isset($errors)) {echo $data['owner_name']; } else { echo $_SESSION['restaurant']['owner_name'];}?>"/>
 										</div>
 										<div>
-											<input type="email" name="email" id="email" placeholder="Enter email" required="required"
+                                            <label for="email">Email :</label>
+											<input type="email" name="email" id="email" placeholder="Enter email" title="Enter email" required="required"
                                                 value="<?php if(isset($errors)) {echo $data['email']; } else { echo $_SESSION['restaurant']['email'];}?>"/>
 										</div>
                                         <div>
-											<input type="text" name="phone" id="phone" placeholder="Enter phone" required="required" 
+                                            <label for="phone">Phone :</label>
+											<input type="text" name="phone" id="phone" placeholder="Enter phone" title="Enter phone" required="required" 
                                             value="<?php if(isset($errors)) {echo $data['phone']; } else { echo $_SESSION['restaurant']['phone'];}?>"/>
 										</div>
                                         <div>
-											<input type="file" name="image" id="image"/>
+                                            <label for="image">Photo :</label>
+											<input type="file" name="image" title="upload photo" id="image"/>
 										</div>
 										<div>
+                                            <label for="address">Address :</label>
 											<textarea name="address" id="address" class="form-control" rows="6" required="required"
-												placeholder="Enter Address"><?php if(isset($errors)) {echo $data['address']; } else { echo $_SESSION['restaurant']['address'];}?></textarea>                                                    
+												placeholder="Enter Address" title="Enter Address"><?php if(isset($errors)) {echo $data['address']; } else { echo $_SESSION['restaurant']['address'];}?></textarea>                                                    
 										</div>
                                         <div>
+                                            <label for="description">Description :</label>
 											<textarea name="description" id="description" class="form-control" rows="7" required="required"
-												placeholder="Enter description"><?php if(isset($errors)) {echo $data['description']; } else { echo $_SESSION['restaurant']['description'];}?></textarea>                                                    
+												placeholder="Enter description" title="Enter description"><?php if(isset($errors)) {echo $data['description']; } else { echo $_SESSION['restaurant']['description'];}?></textarea>                                                    
 										</div>
 										<div>
 											<center><input class="submit" type="submit" name="resEdit" value="Save Changes"></center>

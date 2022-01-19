@@ -21,7 +21,7 @@
                 <div class="art-content flex" style="flex-direction: column;">
                     <div style="width: 50%;margin:0 auto">
                         <div>
-                            <img src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo'] ?>">
+                            <img src="<?php echo $uploads.'meals/'.$meal['id'].'/'.$meal['photo'] ?>" alt="meal photo">
                         </div>
                         <div class="" style="text-align:left">
                             <div style="padding-top:10px">

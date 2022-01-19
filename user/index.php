@@ -21,9 +21,9 @@
                                 <div class= "profile">
                                     <div>
                                         <?php if($_SESSION['user']['photo']  == null) {?>
-                                            <img src="<?php echo $uploads.'users/default.png'?>" alt="" >
+                                            <img src="<?php echo $uploads.'users/default.png'?>" alt="user photo" >
                                         <?php }else{ ?>
-                                            <img src="<?php echo $uploads.'users/'.$_SESSION['user']['id'].'/'.$_SESSION['user']['photo'] ?>" alt="">
+                                            <img src="<?php echo $uploads.'users/'.$_SESSION['user']['id'].'/'.$_SESSION['user']['photo'] ?>" alt="user photo">
                                         <?php }?>
                                     </div>
                                     <div class="">

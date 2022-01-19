@@ -10,14 +10,18 @@
     color: #fff;
 }
 form {padding:0px 25px;}
+form > div {
+    width: 60%;
+    margin: auto;
+}
 
-label {cursor:pointer;margin:5px 0;display:block;font-weight:bold;}
-input {display:block;width:60%;color:#000;border:1px solid #ccc;padding:13px;margin: 5px auto 15px;font-size: 16px;max-height: 45px;}
-textarea {display:block;width:60%;background-color:#fff; color:#000;border:1px solid #ccc;padding:10px;margin: 5px auto 20px;}
+label {cursor:pointer;margin:5px 0;display:block;font-weight:bold;text-align: left;}
+input {display:block;width:100%;color:#000;border:1px solid #ccc;padding:13px;margin: 5px auto 15px;font-size: 16px;max-height: 45px;}
+textarea {display:block;width:100%;background-color:#fff; color:#000;border:1px solid #ccc;padding:10px;margin: 5px auto 20px;}
 input[type="file"] {padding: 0;cursor: pointer; background-color: white;}
-.submit {cursor:pointer;background-color:#7B4A1F;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;;width:30%;color:#ffffff;margin: 0 auto;}
+.submit {cursor:pointer;background-color:#7B4A1F;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;;width:30%;color:#ffffff;margin: 0 auto;width: 100%;}
 .submit:hover {opacity: 0.8;}
-form div span {width: 60%; text-align: left; display: inline-block;font-size: 20px; color: #333; padding-bottom: 15px;}
+form div span {width: 100%; text-align: left; display: inline-block;font-size: 20px; color: #333; padding-bottom: 15px;}
 form div span a {color : black}
 form div span a:hover {color: #7B4A1F !important;}
 label.flex {
@@ -30,6 +34,9 @@ label.flex {
     color: black;
 }
 
+.filter form > div {
+    width: 100%;
+}
 .filter label.flex {
     width: 100% !important;
     justify-content: start !important;

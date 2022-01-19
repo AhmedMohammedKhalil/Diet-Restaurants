@@ -32,11 +32,13 @@
 						<div class="form">
 							<form name="form1"  method="Post" action="<?php echo $cont."Controller.php?do=userLogin" ?>">
 								<div>
-									<input type="email" name="email" id="email" placeholder="Enter email" required="required" 
+									<label for="email">Email</label>
+									<input type="email" name="email" id="email" placeholder="Enter email" title="Enter email" required="required" 
 									value="<?php if(isset($errors)){echo $data['email'];}?>"/>
 								</div>
-								<div>	
-									<input type="password" name="password" id="pass" placeholder="Enter Password" required="required" />
+								<div>
+									<label for="pass">Password</label>	
+									<input type="password" name="password" id="pass" placeholder="Enter Password" title="Enter Password" required="required" />
 								</div>
 								<div>
 									<span>If you don't have account <a href="<?php echo $cont."Controller.php?do=showUserRegister" ?>">Sign Up</a></span>

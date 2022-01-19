@@ -46,14 +46,16 @@
                                     <form name="form1"  method="POST" action="<?php echo $cont.'Controller.php?do=makeCompare' ?>">
                                         <div style="display: flex;justify-content:space-around;margin-bottom:20px">
                                             <div style="width: 40%;">
-                                                <select name="res1" id="res1">
+                                                <label for="res1">Choose Restaurant :</label>
+                                                <select name="res1" id="res1" title="Choose Restaurant">
                                                     <?php foreach($restaurants as $r) {
                                                        echo "<option value='{$r['id']}'>{$r['name']}</option> " ;
                                                     } ?>
                                                 </select>
                                             </div>
                                             <div style="width: 40%;">
-                                                <select name="res2" id="res2">
+                                                <label for="res2">Choose Restaurant :</label>
+                                                <select name="res2" id="res2" title="Choose Restaurant">
                                                     <?php foreach($restaurants as $r) {
                                                        echo "<option value='{$r['id']}'>{$r['name']}</option> " ;
                                                     } ?>
@@ -63,7 +65,7 @@
                                         
                                         <div>
                                             <div>
-                                                <center><input class="submit" type="submit" name="compare" value="Compare"></center>
+                                                <center><input class="submit" type="submit" name="compare" value="Compare" style="width: 40%;"></center>
                                             </div>
                                         </div>
                                     </form>
@@ -72,12 +74,12 @@
                                 <hr class="line-2">
                                 <div style="display: flex;justify-content:space-around">
                                     
-                                    <div class="post" style="width: 40%;">
+                                    <div class="post" style="width: 40%;text-align:left">
                                         <?php
                                             if($res1['photo'] != null)
-                                                    echo '<img src="'.$uploads.'restaurants/'.$res1['id'].'/'.$res1['photo'].'" alt="">';
+                                                    echo '<img src="'.$uploads.'restaurants/'.$res1['id'].'/'.$res1['photo'].'" alt="restaurants photo">';
                                                 else
-                                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="">'; 
+                                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="restaurants photo">'; 
                                         ?> 
                                         <h3><?php echo $res1['name']?></h3>
                                         <h3><?php echo $res1['owner_name']?></h3>
@@ -87,12 +89,12 @@
                                         <p class="text-overflow"><?php echo nl2br($res1['address'])?></p>
                                         <a class="button" href="<?php $cont.'Controller.php?do=showRestaurant&id='.$res1['id'] ?>">See All</a>
                                     </div>
-                                    <div class="post" style="width: 40%;">
+                                    <div class="post" style="width: 40%;text-align:left">
                                         <?php
                                             if($res2['photo'] != null)
-                                                    echo '<img src="'.$uploads.'restaurants/'.$res2['id'].'/'.$res2['photo'].'" alt="">';
+                                                    echo '<img src="'.$uploads.'restaurants/'.$res2['id'].'/'.$res2['photo'].'" alt="restaurants photo">';
                                                 else
-                                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="">'; 
+                                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="restaurants photo">'; 
                                         ?>                                         
                                         <h3><?php echo $res2['name']?></h3>
                                         <h3><?php echo $res2['owner_name']?></h3>

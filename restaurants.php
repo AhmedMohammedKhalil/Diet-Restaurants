@@ -29,9 +29,9 @@
                     <?php foreach($restaurants as $res)  {
                             echo '<div class="wrap-col post">';
                                 if($res['photo'] != null)
-                                    echo '<img src="'.$uploads.'restaurants/'.$res['id'].'/'.$res['photo'].'" alt="">';
+                                    echo '<img src="'.$uploads.'restaurants/'.$res['id'].'/'.$res['photo'].'" alt="restaurants photo">';
                                 else
-                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="">';
+                                    echo '<img src="'.$uploads.'restaurants/res1.jpg" alt="restaurants photo">';
                                 echo '<h3>'.$res['name'].'</h3>';
                                 echo '<h3>rating :'.$res['count_rating'].'</h3>';
                                 echo '<h3 style="margin: 10px 0;">'.$res['owner_name'].'</h3>';
