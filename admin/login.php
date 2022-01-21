@@ -1,12 +1,12 @@
 <?php
 	ob_start();
 	session_start();
-	$pageTitle = 'User login';
+	$pageTitle = 'Admin login';
 	include 'init.php';
 	if(isset($_SESSION['username'])) {
 		header("location: {$app}");
 	}
-	$headerTitle = 'User Login';
+	$headerTitle = 'Admin Login';
 	include $inc.'header.php';
 	if(isset($_GET['errors'])) {
 		$errors = json_decode($_GET['errors'],JSON_OBJECT_AS_ARRAY);
@@ -19,7 +19,7 @@
 				<article class="background-transparent">
 					<div class="art-header">
 						<hr class="line-2">
-						<h2>User Sign In</h2>
+						<h2>Admin Sign In</h2>
 					</div>
 					<div class="art-content">
 						<?php if(isset($errors)) {
@@ -30,7 +30,7 @@
 							echo '</ul>';
 						}?>
 						<div class="form">
-							<form name="form1"  method="Post" action="<?php echo $cont."Controller.php?do=userLogin" ?>">
+							<form name="form1"  method="Post" action="<?php echo $cont."Controller.php?do=adminLogin" ?>">
 								<div>
 									<label for="email">Email</label>
 									<input type="email" name="email" id="email" placeholder="Enter email" title="Enter email" required="required" 
@@ -46,10 +46,7 @@
 										<input type="text" name="captcha" id="captcha" required title="Enter Captcha" placeholder="Enter captcha"  style="flex:1 ;margin:0 10px 0 0">
 										<img src="<?php echo $inc.'captcha.php'?>" alt="captcha image" style="height: 45px;width: 168px;">
 									</div>
-								</div>	
-								<div>
-									<span>If you don't have account <a href="<?php echo $cont."Controller.php?do=showUserRegister" ?>">Sign Up</a></span>
-								</div>			
+								</div>		
 								<div>
 									<center><input class="submit" type="submit" name="login" value="Sign In"></center>
 								</div>		

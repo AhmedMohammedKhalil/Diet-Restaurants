@@ -18,16 +18,31 @@ class UserController{
             if(isset($_POST['login'])) {
                 $email = trim($_POST['email']);
                 $password = trim($_POST['password']);
+                $captcha = trim($_POST['captcha']);
                 $data = [
                     'email'=>$email,
                     'password' => $password,
                 ];
-               $encoded= json_encode($data);
-                if(strlen($password)<8){
-                    $error=json_encode(['password must be greater than 8 digit']);
+                $encoded= json_encode($data);
+                if(empty($email)) {
+                    array_push($error,"Email required");
+                }
+                if(empty($password)) {
+                    array_push($error,"Password required");
+                }
+                if(strlen($password)<8) {
+                    array_push($error,"password must be greater than 8 digit");
+                } 
+                if ($captcha != $_SESSION['CAPTCHA_CODE']) {
+                    array_push($error,"Captcha not matched");
+                } 
+                if(!empty($error))
+                {
+                    $error=json_encode($error);
                     header('Location: '.$userroute."login.php?errors={$error}&data={$encoded}");
                     exit();
                 }
+                 
                 $user = new User();
                 $user->getUserAndLogin($data);
             }
@@ -43,6 +58,8 @@ class UserController{
                 $address = trim($_POST['address']);
                 $password = trim($_POST['password']);
                 $confirm_password = trim($_POST['confirm_password']);
+                $captcha = trim($_POST['captcha']);
+
                 $data = [
                     'email'=>$email,
                     'name'=>$name,
@@ -65,6 +82,9 @@ class UserController{
                 } 
                 if (empty($address)) {
                     array_push($error,"address required");
+                } 
+                if ($captcha != $_SESSION['CAPTCHA_CODE']) {
+                    array_push($error,"Captcha not matched");
                 } 
                 if(!empty($error))
                 {

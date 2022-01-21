@@ -19,13 +19,27 @@ class RestaurantsController {
             if(isset($_POST['login'])) {
                 $email = trim($_POST['email']);
                 $password = trim($_POST['password']);
+                $captcha = trim($_POST['captcha']);
                 $data = [
                     'email'=>$email,
                     'password' => $password,
                 ];
-               $encoded= json_encode($data);
-                if(strlen($password)<8){
-                    $error=json_encode(['password must be greater than 8 digit']);
+                $encoded= json_encode($data);
+                if(empty($email)) {
+                    array_push($error,"Email required");
+                }
+                if(empty($password)) {
+                    array_push($error,"Password required");
+                }
+                if(strlen($password)<8) {
+                    array_push($error,"password must be greater than 8 digit");
+                } 
+                if ($captcha != $_SESSION['CAPTCHA_CODE']) {
+                    array_push($error,"Captcha not matched");
+                } 
+                if(!empty($error))
+                {
+                    $error=json_encode($error);
                     header('Location: '.$restaurantsroute."login.php?errors={$error}&data={$encoded}");
                     exit();
                 }
@@ -47,6 +61,8 @@ class RestaurantsController {
                 $description = trim($_POST['description']);
                 $password = trim($_POST['password']);
                 $confirm_password = trim($_POST['confirm_password']);
+                $captcha = trim($_POST['captcha']);
+
                 $data = [
                     'email'=>$email,
                     'name'=>$name,
@@ -90,6 +106,9 @@ class RestaurantsController {
                 } 
                 if (empty($description)) {
                     array_push($error,"description required");
+                } 
+                if ($captcha != $_SESSION['CAPTCHA_CODE']) {
+                    array_push($error,"Captcha not matched");
                 } 
                 if(!empty($error))
                 {

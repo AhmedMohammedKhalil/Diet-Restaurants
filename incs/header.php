@@ -29,6 +29,7 @@
                           <?php if(!isset($_SESSION['username'])) { ?>
                             <li><a href='<?php echo $cont."Controller.php?do=showUserLogin" ?>'><span>User</span></a></li>
                             <li><a href='<?php echo $cont."Controller.php?do=showResLogin" ?>'><span>Restaurant</span></a></li>
+                            <li><a href='<?php echo $cont."Controller.php?do=showAdminLogin" ?>'><span>Admin</span></a></li>
                             <?php } else { 
                               if(isset($_SESSION['type']) && $_SESSION['type'] == "restaurant") {
                             ?>
@@ -45,7 +46,15 @@
                               <li>
                                 <a href="<?php  echo $cont."Controller.php?do=userLogout" ?>">Logout</a>
                               </li>
+                            <?php } elseif(isset($_SESSION['type']) && $_SESSION['type'] == "admin") { ?>
+                              <li>
+                                  <a href="<?php echo $cont."Controller.php?do=showAdminProfile" ?>"><?php echo $_SESSION['username']?></a>
+                              </li>
+                              <li>
+                                <a href="<?php  echo $cont."Controller.php?do=adminLogout" ?>">Logout</a>
+                              </li>
                             <?php }} ?>
+
                         </ul>
                     </section>
                     

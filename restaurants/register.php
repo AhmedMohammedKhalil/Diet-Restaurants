@@ -67,6 +67,13 @@
 											<input type="password" name="confirm_password" id="co_password" placeholder="Enter password again" title="Enter password again" required="required" />
 										</div>
 										<div>
+											<label for="captcha">Enter Words in Picture</label>
+											<div style="display: flex;margin-bottom:20px;justify-content:space-between">
+												<input type="text" name="captcha" id="captcha" required title="Enter Captcha" placeholder="Enter captcha"  style="flex:1 ;margin:0 10px 0 0">
+												<img src="<?php echo $inc.'captcha.php'?>" alt="captcha image" style="height: 45px;width: 168px;">
+											</div>
+										</div>
+										<div>
 											<span>If you have account <a href="<?php echo $cont."Controller.php?do=showResLogin" ?>">Sign In</a></span>
 										</div>
 										<div>

@@ -122,6 +122,7 @@ class MealsController {
                             $i++;
                         }       
                     }
+
                     $meals = base64_encode(json_encode($mealModel->getAllMeals('*','meals',"WHERE {$str}")));
                     $filter = json_encode(['search' => $search,'price' => $price , 'calories' => $calories]);
                     header("location: ../meals.php?filters={$filter}&meals={$meals}" );

@@ -2,6 +2,7 @@
 session_start();
 include_once('HomeController.php');
 include_once('UserController.php');
+include_once('AdminController.php');
 include_once('RestaurantsController.php');
 include_once('MealsController.php');
 include_once('PackagesController.php');
@@ -77,6 +78,62 @@ if($action != "") {
                 $id = $_GET['id'];
                 $package = new PackagesController();
                 $package->subscribePackage($id);
+            }
+        } elseif ($_SESSION['type'] == 'admin') {
+
+            if($action == 'adminLogout') {
+                $admin = new AdminController();
+                $admin->logout();
+            }
+            if($action == 'showAdminProfile') {
+                $admin = new AdminController();
+                $admin->showProfile();
+            }
+            if($action == 'showAdminChangePassword') {
+                $admin = new AdminController();
+                $admin->showChangePassword();
+            }
+            if($action == 'showAdminSubscribes') {
+                $admin = new AdminController();
+                $admin->showAllSubscribes();
+            }
+            
+            if($action == 'showAdminSettings') {
+                $admin = new AdminController();
+                $admin->showSettings();
+            }
+            if($action == 'editAdmin') {
+                $admin = new AdminController();
+                $admin->editAdmin();
+            }
+            if($action == "AdminChangePass") {
+                $admin = new AdminController();
+                $admin->changePassword();
+            }
+            if($action == "showAdminOrders") {
+                $admin = new AdminController();
+                $admin->showAllOrders();
+            }
+            if($action == "showAdminRestaurants") {
+                $admin = new AdminController();
+                $admin->showAllRestaurants();
+            }
+            if($action == "showAdminUsers") {
+                $admin = new AdminController();
+                $admin->showAllUsers();
+            }
+            if($action == "showAdminPackages") {
+                $admin = new AdminController();
+                $admin->showAllPackages();
+            }
+            if($action == "showAdminMeals") {
+                $admin = new AdminController();
+                $admin->showAllMeals();
+            }
+            if($action == "showUserDetails") {
+                $id = $_GET['id'];
+                $admin = new AdminController();
+                $admin->showUserDetials($id);
             }
         } else {
 
@@ -177,6 +234,13 @@ if($action != "") {
     }
 
         // all 
+        if($action == 'showAdminLogin') {
+            AdminController::show_login();
+        }
+        if($action == 'adminLogin') {
+            $user = new AdminController();
+            $user->login();
+        }
         if($action == 'showUserLogin') {
             UserController::show_login();
         }
@@ -206,6 +270,7 @@ if($action != "") {
             $res = new RestaurantsController();
             $res->Register();
         }
+
         if($action == 'showRestaurants') {
             HomeController::show_restaurants();
         }
@@ -228,6 +293,10 @@ if($action != "") {
             $id = $_GET['id'];
             HomeController::show_Package($id);
         }
+        if($action == "searchRes") {
+            $res = new RestaurantsController();
+            $res->search();
+        }
         if($action == 'showCompare') {
             HomeController::show_compare();
         }
@@ -239,10 +308,7 @@ if($action != "") {
             $package = new PackagesController();
             $package->makeFilter();
         }
-        if($action = "searchRes") {
-            $res = new RestaurantsController();
-            $res->search();
-        }
+        
         if($action = "makeCompare") {
             $res = new RestaurantsController();
             $res->compare();

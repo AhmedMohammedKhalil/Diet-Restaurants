@@ -72,7 +72,7 @@ article img{height: 300px;width: 100%; border: none;}
 article .art-header{padding: 40px 0 20px;}
 article .art-header h2{color: #333;font-size: 70px;font-weight: 500;padding: 0;margin: 0;}
 article .art-content{padding: 20px;}
-article .art-content.flex{display: flex;justify-content:space-around;}
+article .art-content.flex{display: flex;justify-content:space-around;flex-wrap: wrap;}
 article .art-content.flex.restaurants{flex-wrap: wrap;}
 
 
@@ -92,7 +92,7 @@ article .info a:hover{ text-decoration: underline;}
 aside {display: flex; flex-wrap: wrap; justify-content: space-evenly;}
 aside.left {width: 45%;}
 aside.left > div {width: 100%;}
-aside .item-container {width:45%}
+aside .item-container {width:314px}
 .item-container img {
 	display: block;width:300px;height: 300px;
 }
@@ -113,7 +113,7 @@ aside .item-container {width:45%}
 	display: block;text-align: center;color: #fff;display: none;
 }
 .item-container .item-caption h3{
-	font-size: 35px;letter-spacing: 2px;margin-bottom : 10px;
+	font-size: 35px;letter-spacing: 2px;margin-bottom : 10px; line-height: 30px;
 }
 .item-container .item-caption span{font-size: 22px;}
 
@@ -125,6 +125,7 @@ a.button:hover{background-color: #eee;color: #333;border: 2px solid #333;}
 
 aside .profile {
 	width: 50%;
+	height: fit-content;
 	box-shadow: 0px 1px 6px black;
 	padding: 20px;
 	border-radius: 10px;

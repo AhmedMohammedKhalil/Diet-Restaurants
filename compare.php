@@ -87,7 +87,7 @@
                                         <h3>rates : <?php echo $res1['count_rating']?></h3>
                                         <p class="text-overflow"><?php echo nl2br($res1['description'])?></p>
                                         <p class="text-overflow"><?php echo nl2br($res1['address'])?></p>
-                                        <a class="button" href="<?php $cont.'Controller.php?do=showRestaurant&id='.$res1['id'] ?>">See All</a>
+                                        <a class="button" href="<?php echo $cont.'Controller.php?do=showRestaurant&id='.$res1['id'] ?>">See All</a>
                                     </div>
                                     <div class="post" style="width: 40%;text-align:left">
                                         <?php
@@ -102,7 +102,7 @@
                                         <h3>rates : <?php echo $res2['count_rating']?></h3>
                                         <p class="text-overflow"><?php echo nl2br($res2['description'])?></p>
                                         <p class="text-overflow"><?php echo nl2br($res2['address'])?></p>
-                                        <a class="button" href="<?php $cont.'Controller.php?do=showRestaurant&id='.$res2['id'] ?>">See All</a>
+                                        <a class="button" href="<?php echo $cont.'Controller.php?do=showRestaurant&id='.$res2['id'] ?>">See All</a>
                                     </div>
                                 </div>
                                 <?php }?>

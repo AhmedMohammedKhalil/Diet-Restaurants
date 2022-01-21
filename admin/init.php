@@ -11,8 +11,9 @@ $app   = '../';
 
 
 $userroute = '../user/';  
-$restaurantsroute = '../restaurants/';  
+$restaurantsroute = '../restaurants/'; 
 $adminroute = '../admin/';  
+
 
 if(isset($valid)) {
     if(!isset($_SESSION['username'])) {
@@ -21,8 +22,8 @@ if(isset($valid)) {
         if(isset($_SESSION['type']) && $_SESSION['type'] == 'restaurant') {
             header("location: {$restaurantsroute}");
         }
-        if(isset($_SESSION['type']) && $_SESSION['type'] == 'admin') {
-            header("location: {$adminroute}");
+        if(isset($_SESSION['type']) && $_SESSION['type'] == 'user') {
+            header("location: {$userroute}");
         }
     }
 }
