@@ -27,7 +27,7 @@
                 </div>
                 <div class="art-content flex restaurants">
                     <?php foreach($restaurants as $res)  {
-                            echo '<div class="wrap-col post">';
+                            echo '<div class="post">';
                                 if($res['photo'] != null)
                                     echo '<img src="'.$uploads.'restaurants/'.$res['id'].'/'.$res['photo'].'" alt="restaurants photo">';
                                 else
