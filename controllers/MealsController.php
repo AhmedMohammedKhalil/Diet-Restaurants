@@ -51,6 +51,7 @@ class MealsController {
                         'restaurant' => $restaurant
                     ];
                     $encoded = base64_encode(json_encode($data));
+                    $_SESSION['msg'] = "Meal has been successfully rated";
                     header("location: ../meal_details.php?data={$encoded}" );
                     exit();
                 }
@@ -139,6 +140,7 @@ class MealsController {
         $meal = new Meal();
         $success = $meal->orderMeal($user_id,$id);
         if($success) {
+            $_SESSION['msg'] = "Meal has been successfully purchased";
             header('location: Controller.php?do=showUserOrders');
         }
     }
@@ -245,6 +247,8 @@ class MealsController {
                         mkdir($path);
                     }
                     move_uploaded_file($photoTmp, '../uploads/meals/'.$meal_id.'/'. $photoName);
+                    $_SESSION['msg'] = "Meal Added Successfuly";
+
                     $this->showAllMeals();
                 }
                 
@@ -350,6 +354,8 @@ class MealsController {
                         unlink($path.'/'.$photo);
                         move_uploaded_file($photoTmp, $path.'/'. $photoName);
                     } 
+                    $_SESSION['msg'] = "Meal Updated Successfuly";
+
                     $this->showAllMeals();
                 }
                 
@@ -385,6 +391,7 @@ class MealsController {
                 array_map("unlink", glob("$dirname/*"));
                 array_map("rmdir", glob("$dirname/*"));
                 rmdir($dirname);
+                $_SESSION['msg'] = "Meal Deleted Successfuly";
                 $this->showAllMeals();
             }
         }

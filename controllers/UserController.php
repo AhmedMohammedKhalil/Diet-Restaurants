@@ -165,6 +165,7 @@ class UserController{
                     $_SESSION['username'] = $name;
                     $_SESSION['user']['email'] = $email;
                     $_SESSION['user']['address'] = $address;
+                    $_SESSION['msg'] = "Edit Profile successfully ";
                     header("location: {$userroute}" );
                 }
 
@@ -220,6 +221,7 @@ class UserController{
                 $success = $user->updatePhoto($user_id,$photoName);
                 if($success) {
                     $_SESSION['user']['photo'] = $photoName;
+                    $_SESSION['msg'] = "Photo Updated successfully ";
                     header("location: ../user/" );
                 }
 
@@ -253,6 +255,8 @@ class UserController{
                 $success = $user->changePassword($user_id,$data);
                 if($success) {
                     $_SESSION['user']['password'] = password_hash($password, PASSWORD_BCRYPT);
+                    $_SESSION['msg'] = "Change Password successfully ";
+
                     header("location: ../user/" );
                 }
 

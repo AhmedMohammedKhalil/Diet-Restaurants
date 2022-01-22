@@ -30,6 +30,7 @@ class Admin{
             $_SESSION['username'] = $result['name'];
             $_SESSION['type'] ="admin";
             unset($_SESSION['CAPTCHA_CODE']);
+            $_SESSION['msg'] = "Admin Login Successfuly";
             header('location: ../index.php' );
             exit();
         }

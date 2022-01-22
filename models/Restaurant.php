@@ -28,7 +28,7 @@ class Restaurant{
             $_SESSION['username'] = $result['name'];
             $_SESSION['type'] ="restaurant";
             unset($_SESSION['CAPTCHA_CODE']);
-
+            $_SESSION['msg'] = "Restaurnat Login successfully ";
             header('location: ../index.php' );
             exit();
         }
@@ -68,6 +68,7 @@ class Restaurant{
                 $_SESSION['username'] = $result['name'];
                 $_SESSION['type'] ="restaurant";
                 unset($_SESSION['CAPTCHA_CODE']);
+                $_SESSION['msg'] = "Restaurnat Register successfully ";
 
                 header('location: ../index.php' );
                 exit();

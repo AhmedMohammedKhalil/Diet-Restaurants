@@ -39,6 +39,7 @@ class AdminController{
                     exit();
                 }
                 $admin = new Admin();
+
                 $admin->getAdminAndLogin($data);
             }
         }
@@ -100,6 +101,7 @@ class AdminController{
                     $_SESSION['admin']['name'] = $name;
                     $_SESSION['username'] = $name;
                     $_SESSION['admin']['email'] = $email;
+                    $_SESSION['msg'] = "Edit Profile Successfuly";
                     header("location: {$adminroute}" );
                 }
 
@@ -134,6 +136,8 @@ class AdminController{
                 $success = $admin->changePassword($admin_id,$data);
                 if($success) {
                     $_SESSION['admin']['password'] = password_hash($password, PASSWORD_BCRYPT);
+                    $_SESSION['msg'] = "Change Password Successfuly";
+
                     header("location: ../admin/" );
                 }
 

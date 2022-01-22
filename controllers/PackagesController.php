@@ -58,6 +58,7 @@ class PackagesController {
                         'package' => $package
                     ];
                     $encoded = base64_encode(json_encode($data));
+                    $_SESSION['msg'] = "Package has been successfully rated";
                     header("location: ../package_details.php?data={$encoded}" );
                     exit();
                 }
@@ -144,6 +145,7 @@ class PackagesController {
         $package = new Package();
         $success = $package->subscribePackage($user_id,$id);
         if($success) {
+            $_SESSION['msg'] = "Package has been successfully subscribed";
             header('location: Controller.php?do=showUserSubscribes');
         }
     }
@@ -165,6 +167,7 @@ class PackagesController {
         $meals = $mealModel->getAllMeals('*','meals','where restaurant_id ='.$restaurant_id,null,'id','ASC');
         $encoded = base64_encode(json_encode($meals));
         if(count($meals) > 0) 
+
             header("location: ../restaurants/add_package.php?meals={$encoded}" );
         else 
             header("location: ../restaurants/" );
@@ -268,6 +271,8 @@ class PackagesController {
                         mkdir($path);
                     }
                     move_uploaded_file($photoTmp, '../uploads/packages/'.$package_id.'/'. $photoName);
+                    $_SESSION['msg'] = "Package Added successfully ";
+
                     $this->showAllPackages();
                 }
                 
@@ -394,6 +399,7 @@ class PackagesController {
                         unlink($path.'/'.$photoName);
                         move_uploaded_file($photoTmp, '../uploads/packages/'.$package_id.'/'. $photoName);
                     } 
+                    $_SESSION['msg'] = "Package Updated successfully ";
                     $this->showAllPackages();
                 }
                 
@@ -427,6 +433,7 @@ class PackagesController {
                 array_map("unlink", glob("$dirname/*"));
                 array_map("rmdir", glob("$dirname/*"));
                 rmdir($dirname);
+                $_SESSION['msg'] = "Package deleted successfully ";
                 $this->showAllPackages();
             }
         }

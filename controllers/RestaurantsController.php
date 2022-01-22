@@ -92,9 +92,6 @@ class RestaurantsController {
                 if (!empty($phone) && !is_numeric($phone)) {
                     array_push($error,"phone must be number");
                 } 
-                if (!empty($phone) && strlen($phone)<6) {
-                    array_push($error,"Phone must be 6 digit");
-                }
                 if (strlen($password)<8) {
                     array_push($error,"password must be greater than 8 digit");
                 } 
@@ -193,6 +190,7 @@ class RestaurantsController {
                         'packages' => $packages
                     ];
                     $encoded = base64_encode(json_encode($data));
+                    $_SESSION['msg'] = "Restaurant has been successfully rated";
                     header("location: ../restaurant_details.php?data={$encoded}" );
                     exit();
                 }
@@ -390,7 +388,7 @@ class RestaurantsController {
                     $_SESSION['restaurant']['owner_name'] = $owner_name;
                     $_SESSION['restaurant']['phone'] = $phone;
                     $_SESSION['restaurant']['description'] = $description;
-
+                    $_SESSION['msg'] = "Edit Profile successfully ";
                     header("location: {$restaurantsroute}" );
                 }
 
@@ -425,6 +423,7 @@ class RestaurantsController {
                 $success = $restaurants->changePassword($restaurants_id,$data);
                 if($success) {
                     $_SESSION['restaurant']['password'] = password_hash($password, PASSWORD_BCRYPT);
+                    $_SESSION['msg'] = "Change Password successfully ";
                     header("location: ../restaurants/" );
                 }
 

@@ -8,8 +8,17 @@
     include($inc.'landing.php');
     //get all details about comp
 ?>
-<section id="container">
+    
+            <section id="container">
                 <div id="main-content">
+                <?php if(isset($_SESSION['msg'])) { ?>
+                    <p style="color:black;background:#8bfa8b;padding:20px;margin:0">
+                        <?php 
+                            echo $_SESSION['msg'] ;
+                            unset($_SESSION['msg']);
+                        ?>
+                    </p>
+                <?php } ?>
                     <article class="background-gray">
                         <div class="art-header">
                             <hr class="line-2">

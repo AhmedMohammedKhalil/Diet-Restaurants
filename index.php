@@ -10,9 +10,18 @@
     extract($data);
     //unset($_SESSION['username']);
 ?>
+    
     <section id="container">
                 <div id="main-content">
                     <article class="background-gray">
+                        <?php if(isset($_SESSION['msg'])) { ?>
+                            <p style="color:black;background:#8bfa8b;padding:20px;margin:0">
+                                <?php 
+                                    echo $_SESSION['msg'] ;
+                                    unset($_SESSION['msg']);
+                                ?>
+                            </p>
+                        <?php } ?>
                         <div class="art-header">
                             <hr class="line-2">
                             <?php 
@@ -71,7 +80,7 @@
                         </div>
                     </article>
                 </div>
-            </section>
+    </section>
 <?php
     include($inc.'footer.php');
     ob_end_flush();

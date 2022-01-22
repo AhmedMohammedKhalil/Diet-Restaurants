@@ -45,7 +45,7 @@
 										</div>
 										<div>
 											<label for="phone">Phone :</label>
-											<input type="text" name="phone" id="phone" placeholder="Enter phone" title="Enter phone" required="required"
+											<input type="text" name="phone" id="phone" pattern="[0-9]{8}" maxlength="8" placeholder="Enter phone" title="Enter phone" required="required"
 											value="<?php if(isset($errors)){echo $data['phone'];}?>" />
 										</div>
 										<div>

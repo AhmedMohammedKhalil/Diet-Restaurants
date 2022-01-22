@@ -39,6 +39,7 @@ class User{
                 $_SESSION['username'] = $result['name'];
                 $_SESSION['type'] ="user";
                 unset($_SESSION['CAPTCHA_CODE']);
+                $_SESSION['msg'] = "User Register successfully ";
 
                 header('location: ../index.php' );
                 exit();
@@ -70,6 +71,7 @@ class User{
             $_SESSION['username'] = $result['name'];
             $_SESSION['type'] ="user";
             unset($_SESSION['CAPTCHA_CODE']);
+            $_SESSION['msg'] = "User Login successfully ";
 
             header('location: ../index.php' );
             exit();
